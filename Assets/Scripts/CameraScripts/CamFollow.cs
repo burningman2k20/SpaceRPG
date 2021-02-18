@@ -23,10 +23,11 @@ public class CamFollow : MonoBehaviour
 
     void Update()
     {
+        if (gameManager == null) gameManager = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
         if (!gameManager.gameStarted) return;
         if (target.Equals(null))
         {
-            target= gameManager.findPlayer().transform;
+            target = gameManager.findPlayer().transform;
             //if (target.)
             target = GameObject.Find(gameManager.currentPrefab.name + "(Clone)").transform;
             //transform.position = new Vector3(target.position.x, offset_move.y, target.position.y);

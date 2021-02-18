@@ -17,28 +17,28 @@ public class Selection : MonoBehaviour
         
         //GameObject.Find("UIManager").GetComponent<SelectionUI>().enabled = true;
         select = GameObject.Find("UIManager").GetComponentInChildren<SelectionUI>();
-        select.target = gameObject;// as GameObject;
+        select.target = gameObject as GameObject;
         //select.FindSelectionObjects();
         if (gameObject.GetComponent<Target>() != null) {
             
-            gameObject.GetComponent<Target>().indicator.Activate(true);
+            if (gameObject.GetComponent<Target>().indicator != null) gameObject.GetComponent<Target>().indicator.Activate(true);
             //Debug.Log(gameObject.GetComponent<Target>().indicator.isActive());
         }
 
         //IndicatorTarget indicator = ;
         //IndicatorViewer.TrackTarget(gameObject);
-        if (GetComponent<LandingArea>() != null)
-        {
-            // print("landing area " + gameObject.name);
-        }
+        // if (GetComponent<LandingArea>() != null)
+        // {
+        //     // print("landing area " + gameObject.name);
+        // }
         //clear = false;
 
     }
 
-    void OnMouseExit()
-    {
-        //clear = true;
-    }
+    // void OnMouseExit()
+    // {
+    //     //clear = true;
+    // }
 
     // Start is called before the first frame update
     void Start()
@@ -69,6 +69,5 @@ public class Selection : MonoBehaviour
         }
         //if (clear)
         //GameObject.Find("UIManager").GetComponent<SelectionUI>().target =null;
-
     }
 }

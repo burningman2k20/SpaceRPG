@@ -20,7 +20,8 @@ public class GameManager : MonoBehaviour
 
     //[Header("Stats")]
    // [SerializeField] 
-   public PlayerStats playerStats; // = new PlayerStats();
+   //public PlayerStats playerStats; // = new PlayerStats();
+   public PlayerDataClass playerData = new PlayerDataClass();
     //public SpawnPlayer spawnPlayer;
 
     [Header("Player Prefabs")]
@@ -114,7 +115,7 @@ public class GameManager : MonoBehaviour
         //     //currentPrefab = Instantiate(groundPrefab, SpawnPoints[spawnIndex].transform.position + besideShip, SpawnPoints[spawnIndex].transform.rotation);
         // }
 
-        Debug.Log("called _SpawnPlayer() method");
+       // Debug.Log("called _SpawnPlayer() method");
         mainCamera = GameObject.Find("MainCamera").GetComponent<Camera>();
         mapCamera = GameObject.Find("MapCamera").GetComponent<Camera>();
         selectionUI = GameObject.Find("UIManager").GetComponent<SelectionUI>();
@@ -175,7 +176,7 @@ public class GameManager : MonoBehaviour
                 {
 
                 }
-                Debug.Log("player prefab -> " + player);
+                //Debug.Log("player prefab -> " + player);
                 
                 currentPrefab = player;
                 follow.target = player.transform;
@@ -188,7 +189,7 @@ public class GameManager : MonoBehaviour
             {
                 //spawnIndex = -1;
                 //spawnName = "none";
-                     Debug.Log("no spawn point found");
+                     //Debug.Log("no spawn point found");
             }
         //}
     }
@@ -231,12 +232,12 @@ public class GameManager : MonoBehaviour
              //Debug.Log(selectionUI);
              selectionUI.FindSelectionObjects();
              this.currentPrefab = locatePlayerPrefab();
-             Debug.Log(locatePlayerPrefab());
+             //Debug.Log(locatePlayerPrefab());
             //playerStatsJSON.name = "currentPlayer.name";
             //playerStatsJSON.score = "100"; 
             //playerStats.playerData.
-            playerStatsJSON = JsonUtility.ToJson(playerStats);
-            Debug.Log(playerStatsJSON);
+            //playerStatsJSON = JsonUtility.ToJson(playerStats);
+            //Debug.Log(playerStatsJSON);
              //Debug.Log(currentPlayer);
             // updateTargets = false;
         // }
@@ -256,6 +257,7 @@ public GameObject findPlayer(){
 			if (tmp.GetComponent<SimpleTankController>().playerControl) return tmp;
 		}
 	}
+    if (SpawnPoints.Length<=0) return null;
     switch (playerLocation){
         case locationType.Space:
             player = Instantiate(spacePrefab, SpawnPoints[spawnIndex].transform.position - hoverPlayer, SpawnPoints[spawnIndex].transform.rotation);
@@ -341,6 +343,7 @@ public void landPlayerShip(){
         GameObject[] found = GameObject.FindGameObjectsWithTag("Player");
 	foreach ( GameObject tmp in found){
 		if (tmp.GetComponent<ShipControls>() != null || tmp.GetComponent<SimpleTankController>() != null){
+                playerData.data.myGameObject = tmp;
 			    return tmp;
             }
 	    }
@@ -349,6 +352,14 @@ public void landPlayerShip(){
     // Update is called once per frame
     void Update()
     {
+
+        if (Input.GetKeyDown(KeyCode.Z)) { // load
+            playerData.LoadData();
+        }
+        
+        if (Input.GetKeyDown(KeyCode.C)) { // save
+            playerData.SaveData();
+        }
 
        
        // Debug.Log(findPlayer());
