@@ -1,11 +1,9 @@
 fileFormatVersion: 2
 guid: 2a1da95585371704c96dfa6e83331c39
-timeCreated: 1463289857
-licenseType: Free
 MonoImporter:
+  externalObjects: {}
   serializedVersion: 2
-  defaultReferences:
-  - ImageIndicator: {fileID: 22473590, guid: ba11db704b42b0a47925e4e2f4f6ad74, type: 2}
+  defaultReferences: []
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

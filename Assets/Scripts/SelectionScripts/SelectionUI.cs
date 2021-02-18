@@ -4,6 +4,7 @@ using UnityEngine;
 using static GameDataTypes;
 using UnityEngine.UI;
 
+// Object Selection UI
 public class SelectionUI : MonoBehaviour
 {
     public List<GameObject> selectObjects;
