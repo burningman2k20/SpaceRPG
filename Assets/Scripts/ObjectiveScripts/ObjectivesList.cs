@@ -1,7 +1,15 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[Serializable]
+public class mainObjectiveList{
+    Objective _objective;
+    string _objectiveDataFile;
+    bool enabled = false;
+    bool active = false;
+}
 
 public class ObjectivesList : MonoBehaviour
 {

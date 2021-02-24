@@ -5,6 +5,10 @@ using UnityEngine;
 public class ObjectiveUI : MonoBehaviour
 {
     public bool showUI = false;
+
+    [Header("UI Rect for List")]
+    public Rect objectiveListRect;
+
     //GameObject obj;
     void OnGUI()
     {
