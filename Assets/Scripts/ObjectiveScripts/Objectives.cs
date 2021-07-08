@@ -48,5 +48,9 @@ public class Objectives : MonoBehaviour
             //GameObject.Find("ArrowImage").GetComponent<PointAtObjective>().targetPosition = ;
             this.CurrentObjectiveDescription.text = "";
         }
+
+        GUILayout.BeginArea(new Rect(0,0,250,250));
+        GUILayout.Label( this.CurrentObjectiveDescription.text);
+        GUILayout.EndArea();
     }
 }
