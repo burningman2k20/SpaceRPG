@@ -9,6 +9,11 @@ public class MainMenu : MonoBehaviour
     GameManager gameManager;
 
     public string sceneName = "Space";
+
+    public void ExitGame(){
+        Application.Quit();
+    }
+
     public void StartGame()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
