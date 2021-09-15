@@ -275,6 +275,61 @@ Camera:
     type: 3}
   m_PrefabInstance: {fileID: 1001603452}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &417738369 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2799729756976975339, guid: 1fe263fbe5094414984e60f764cae7c0,
+    type: 3}
+  m_PrefabInstance: {fileID: 534012542}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &417738377
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 417738369}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ac76d34ad1500748b1340257449a64d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DefaultIndicatorPanel: {fileID: 159380, guid: 16c9f8d5c99f8fc4c8b185deca3116e4,
+    type: 3}
+  ViewerCamera: {fileID: 0}
+  ViewerObject: {fileID: 0}
+  CanvasSortingOrder: -100
+  UpdateInterval: 0.015
+  IndicatorEdgeDistance: 0.9
+  TargetEdgeDistance: 0.95
+  DisableOnDistance: 1
+  DisableDistance: 100
+  OffScreenRotates: 1
+  AutoScale: 1
+  ScalingFactor: 10
+  MinScaleSize: 0.2
+  MaxScaleSize: 100
+  TransitionDuration: 0.25
+  OnScreenEnableTransition: 5
+  OnScreenDisableTransition: 5
+  OffScreenEnableTransition: 5
+  OffScreenDisableTransition: 5
+--- !u!114 &417738378
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 417738369}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a1da95585371704c96dfa6e83331c39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CustomIndicatorPanel: {fileID: 0}
+  onScreenOffset: {x: 0, y: 0}
+  ForceOnScreen: 0
+  ForceOffScreen: 0
+  viewer: {fileID: 0}
 --- !u!1001 &534012542
 PrefabInstance:
   m_ObjectHideFlags: 0

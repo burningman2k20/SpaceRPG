@@ -98,7 +98,7 @@ public class Indicator : MonoBehaviour
     /// </summary>
         public bool isActive()
     {
-        return gameObject.active;
+        return gameObject.activeSelf;
     }
 }
 

@@ -10,7 +10,7 @@ public class SelectionUI : MonoBehaviour
     public List<GameObject> selectObjects;
     public GameObject target;
     public float _distance;
-    Selection selectedObject;
+    _Selection selectedObject;
     public Text newUIText;
 
     public Rect windowRect = new Rect(20, 20, 120, 50);
@@ -28,10 +28,10 @@ public class SelectionUI : MonoBehaviour
     void DoMyWindow(int windowID)
     {
         //if (target.GetComponent<Selection>().Equals(null)) return;
-        if (target.GetComponent<Selection>().selectType == selectionType.TakeOff)
+        if (target.GetComponent<_Selection>().selectType == selectionType.TakeOff)
         {
             // This button will size to fit the window
-            if (GUILayout.Button("Take Off") && _distance < GameObject.FindWithTag("Player").GetComponent<Selection>().maxDistance)
+            if (GUILayout.Button("Take Off") && _distance < GameObject.FindWithTag("Player").GetComponent<_Selection>().maxDistance)
             {
                 //print("take off");
             }
@@ -67,7 +67,7 @@ public class SelectionUI : MonoBehaviour
             //Debug.Log(sel.gameObject.name  + " " + sel.GetComponent<Target>().indicator.isActive());
 
              if (target == null ){
-                 sel.GetComponent<Target>().indicator.Activate(false);    
+                 sel.GetComponent<Target>().indicator.Activate(false);
              } else {
                  target.GetComponent<Target>().indicator.Activate(true);
             }
@@ -106,12 +106,12 @@ public class SelectionUI : MonoBehaviour
             //  } else {
             //      target.GetComponent<Target>().indicator.Activate(true);
             // }
-            if (!sel.GetComponent<Selection>())
+            if (!sel.GetComponent<_Selection>())
             {
                 selectObjects.Remove(sel);
                 //Debug.Log("Removed -> " + sel.name);
             }
-            if (sel.GetComponent<Selection>())
+            if (sel.GetComponent<_Selection>())
             {
                 selectObjects.Add(sel);
                 //Debug.Log("Kept -> " + sel.name);
@@ -143,14 +143,14 @@ public class SelectionUI : MonoBehaviour
             _distance = Vector3.Distance(obj1.position, obj2.position);
             //Debug.Log(_distance);
         }
-        
+
         newUIText = GameObject.Find("object").GetComponent<Text>();
-        
+
         if (target != null) {
-            
+
             newUIText.text = target.name;
 
-            selectedObject = target.GetComponent<Selection>();
+            selectedObject = target.GetComponent<_Selection>();
         } else {
             newUIText.text = "None";
         }

@@ -14,6 +14,9 @@ GameObject:
   - component: {fileID: 4689457750325047070}
   - component: {fileID: 4689457750325047073}
   - component: {fileID: -2537912898712512070}
+  - component: {fileID: -858583602820925052}
+  - component: {fileID: 8698157936674846053}
+  - component: {fileID: -6318726914398685612}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -123,3 +126,56 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxDistance: 1
   selectType: 3
+--- !u!114 &-858583602820925052
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4689457750325047072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 250b46ae70bf97643ac805766a69a34e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Color: {r: 1, g: 0, b: 0, a: 1}
+  RandomColor: 0
+  ChangeGameobjectColor: 0
+  ChangeChildrenColor: 0
+--- !u!114 &8698157936674846053
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4689457750325047072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a1da95585371704c96dfa6e83331c39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CustomIndicatorPanel: {fileID: 0}
+  onScreenOffset: {x: 0, y: 0}
+  ForceOnScreen: 0
+  ForceOffScreen: 0
+  viewer: {fileID: 0}
+--- !u!114 &-6318726914398685612
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4689457750325047072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17672c8170e33724abd648640d8fbfb2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CustomFont: {fileID: 0}
+  ShowOnScreen: 1
+  ShowOffScreen: 1
+  OnScreenPosOffset: {x: 0, y: 65}
+  OffScreenPosOffset: {x: 0, y: -50}
+  distanceSuffix: m
+  DecimalPoint: 0
+  FontSize: 24

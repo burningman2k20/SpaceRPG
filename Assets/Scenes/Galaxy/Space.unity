@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.43946633, g: 0.48781526, b: 0.568051, a: 1}
+  m_IndirectSpecularColor: {r: 0.4394663, g: 0.48781508, b: 0.56805104, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1838,6 +1838,8 @@ GameObject:
   - component: {fileID: 1633170314}
   - component: {fileID: 1633170313}
   - component: {fileID: 1633170312}
+  - component: {fileID: 1633170316}
+  - component: {fileID: 1633170315}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
@@ -1904,12 +1906,61 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1633170311}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.332624, y: 0.664119, z: -3.7870736}
+  m_LocalPosition: {x: -1.332624, y: -3.13, z: -3.7870736}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1633170315
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1633170311}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ac76d34ad1500748b1340257449a64d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DefaultIndicatorPanel: {fileID: 186120, guid: f2a57b2ffb14cdc48a6875473f9a12ce,
+    type: 3}
+  ViewerCamera: {fileID: 0}
+  ViewerObject: {fileID: 0}
+  CanvasSortingOrder: -100
+  UpdateInterval: 0.015
+  IndicatorEdgeDistance: 0.9
+  TargetEdgeDistance: 0.95
+  DisableOnDistance: 1
+  DisableDistance: 100
+  OffScreenRotates: 1
+  AutoScale: 1
+  ScalingFactor: 10
+  MinScaleSize: 0.2
+  MaxScaleSize: 100
+  TransitionDuration: 0.25
+  OnScreenEnableTransition: 5
+  OnScreenDisableTransition: 5
+  OffScreenEnableTransition: 5
+  OffScreenDisableTransition: 5
+--- !u!114 &1633170316
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1633170311}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a1da95585371704c96dfa6e83331c39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CustomIndicatorPanel: {fileID: 186120, guid: f2a57b2ffb14cdc48a6875473f9a12ce, type: 3}
+  onScreenOffset: {x: 0, y: 0}
+  ForceOnScreen: 0
+  ForceOffScreen: 0
+  viewer: {fileID: 1633170315}
 --- !u!1 &1876543514
 GameObject:
   m_ObjectHideFlags: 0

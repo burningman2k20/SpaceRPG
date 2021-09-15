@@ -13,7 +13,7 @@ public class SpawnManager : MonoBehaviour
     int spawnIndex = -1;
 
     GameObject player;
-    
+
      public int FindSpawnByName(string _name)
     {
         for (int index = 0; index < SpawnPoints.Length; index++)
@@ -22,7 +22,7 @@ public class SpawnManager : MonoBehaviour
         }
         return -1;
     }
-    
+
     public GameObject findPlayer(){
     spawnIndex = FindSpawnByName(spawnName);
 	GameObject[] found = GameObject.FindGameObjectsWithTag("Player");
@@ -40,16 +40,16 @@ public class SpawnManager : MonoBehaviour
         // shipControls = player.GetComponent<ShipControls>();
         // shipControls.hoverHeight = hoverHeight;
         return player;
-        break;
+        //break;
         case locationType.Air:
         //player =  Instantiate(spacePrefab, SpawnPoints[spawnIndex].transform.position - hoverPlayer, SpawnPoints[spawnIndex].transform.rotation);
         return player;
-        
-        break;
+
+        //break;
         case locationType.Ground:
        // player =  Instantiate(groundPrefab, SpawnPoints[spawnIndex].transform.position - besideShip, SpawnPoints[spawnIndex].transform.rotation);
         return player;
-        break;
+        //break;
     }
 	return null;
 }
@@ -59,12 +59,12 @@ public class SpawnManager : MonoBehaviour
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         prefabManager = GameObject.Find("PrefabManager").GetComponent<PrefabManager>();
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }

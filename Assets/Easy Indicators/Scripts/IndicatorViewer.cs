@@ -19,7 +19,7 @@ public class IndicatorViewer : MonoBehaviour
     [Header("Settings")]
     [Tooltip("The sorting layer for all the indicators. Lower value = behind UI. Higher value = front of UI")]
     public int CanvasSortingOrder = -100;
-    [Tooltip("How many seconds before indicators update their tracking. Higher = better performance, but more stuttering")] [Range(0, 1)] 
+    [Tooltip("How many seconds before indicators update their tracking. Higher = better performance, but more stuttering")] [Range(0, 1)]
     public float UpdateInterval = 0.015f;
     [Tooltip("The farthest distance indicators will reach from the screen center to the screen edges. Align slider with TargetEdgeDistance for seamless transition.")] [Range(0, 1)]
     public float IndicatorEdgeDistance = 0.9f;
@@ -67,13 +67,17 @@ public class IndicatorViewer : MonoBehaviour
 
         //  If no viewer is assigned, use this gameobject
         if (ViewerObject == null)
-            ViewerObject = gameObject;  
+            ViewerObject = GameObject.FindWithTag("Player");
+			//gameObject;
 
         //  Create canvas is if doesnt already exsist
         if (indicatorCanvas == null)
             CreateIndicatorCanvas();
 	}
 
+void Update(){
+	if (ViewerObject == null) ViewerObject = GameObject.FindWithTag("Player");
+}
     void OnEnable()
     {
         //  start couroutine for updating indicators for every target.

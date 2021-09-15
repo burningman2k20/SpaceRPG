@@ -19,9 +19,11 @@ public class ObjectiveUI : MonoBehaviour
                 Objective objective=obj.GetComponent<Objective>();
                 GUILayout.BeginHorizontal();
                 if (!objective.selected && GUILayout.Button("Select")) {
+					obj.GetComponent<Target>().enabled = true;
                     objective.selected = true;
                 }
                 if (objective.selected && GUILayout.Button("Deselect")) {
+					obj.GetComponent<Target>().enabled = false;
                     objective.selected = false;
                 }
                 GUILayout.Box(obj.GetComponent<Objective>().name);

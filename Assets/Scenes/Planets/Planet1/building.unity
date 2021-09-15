@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311918, g: 0.3807398, b: 0.35872716, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -549,7 +549,7 @@ MonoBehaviour:
   Visable: 1
   spawnName: ExitBuilding1
   playerPrefab: {fileID: 0}
-  SceneName: Ground
+  SceneName: Planet1
   gameManager: {fileID: 0}
   gui_visable: 0
 --- !u!135 &789932241
@@ -1890,6 +1890,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2045607580948139286, guid: 3b15d688667e1854e86f0525fd7c884a,
         type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2045607580948139286, guid: 3b15d688667e1854e86f0525fd7c884a,
+        type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.0290217
       objectReference: {fileID: 0}
@@ -1905,6 +1910,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2045607580948139286, guid: 3b15d688667e1854e86f0525fd7c884a,
         type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2045607580948139286, guid: 3b15d688667e1854e86f0525fd7c884a,
+        type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
@@ -1917,16 +1927,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalRotation.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2045607580948139286, guid: 3b15d688667e1854e86f0525fd7c884a,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2045607580948139286, guid: 3b15d688667e1854e86f0525fd7c884a,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 2045607580948139286, guid: 3b15d688667e1854e86f0525fd7c884a,
         type: 3}

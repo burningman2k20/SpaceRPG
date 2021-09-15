@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] public PrefabManager prefabManager;
 
     //[Header("Stats")]
-   // [SerializeField] 
+   // [SerializeField]
    //public PlayerStats playerStats; // = new PlayerStats();
    public PlayerDataClass playerData = new PlayerDataClass();
     //public SpawnPlayer spawnPlayer;
@@ -61,7 +61,7 @@ public class GameManager : MonoBehaviour
     //public string spaceScene;
     public string sceneName;
     int spawnIndex = -1;
-    
+
     public bool isLanding = false;
     public bool canLand = false;
 
@@ -96,20 +96,20 @@ public class GameManager : MonoBehaviour
         //if (text != null)
         _SpawnPlayer();
     }
-    
+
     public void _SpawnPlayer()
     {
         spawnIndex = FindSpawnByName(spawnName);
              if (findPlayer() == null){
-                
+
                 //currentPrefab = Instantiate(spacePrefab, SpawnPoints[spawnIndex].transform.position - hoverPlayer, SpawnPoints[spawnIndex].transform.rotation);
              }
              currentPrefab = findPlayer();
              //return;
         // if (playerLocation == locationType.Space || playerLocation == locationType.Air){
-                
+
         //         //Instantiate(spacePrefab, SpawnPoints[spawnIndex].transform.position - hoverPlayer, SpawnPoints[spawnIndex].transform.rotation);
-        //         //GameObject go = (GameObject)Instantiate (Resources.Load<GameObject> (prefabPath));                
+        //         //GameObject go = (GameObject)Instantiate (Resources.Load<GameObject> (prefabPath));
         // }
         // if (playerLocation == locationType.Ground){
         //     //currentPrefab = Instantiate(groundPrefab, SpawnPoints[spawnIndex].transform.position + besideShip, SpawnPoints[spawnIndex].transform.rotation);
@@ -177,7 +177,7 @@ public class GameManager : MonoBehaviour
 
                 }
                 //Debug.Log("player prefab -> " + player);
-                
+
                 currentPrefab = player;
                 follow.target = player.transform;
                 mapFollow.target = player.transform;
@@ -199,11 +199,11 @@ public class GameManager : MonoBehaviour
     {
         prefabManager = GameObject.Find("PrefabManager").GetComponent<PrefabManager>();
         spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
-        
+
         follow = GameObject.Find("Main Camera").GetComponent<CamFollow>();
         mapFollow = GameObject.Find("MapCamera").GetComponent<CamFollow>();
 		//playerStats = GameObject.Find("GameManager").GetComponent<PlayerStats>();
-       
+
         selectionUI = GameObject.Find("UIManager").GetComponent<SelectionUI>();
         if (!selectionUI.Equals(null)) selectionUI.FindSelectionObjects();
 	}
@@ -213,7 +213,7 @@ public class GameManager : MonoBehaviour
         //spawnName = "none";
         //SpawnPlayer();
         //print("Loaded : " + scene.name);
-    
+
     }
 
     void FixedUpdate(){
@@ -224,9 +224,9 @@ public class GameManager : MonoBehaviour
 	    // playerStats.playerData._tag = prefabLocation.gameObject.tag;
 		// playerStats.playerData._location = playerLocation;
 		// playerStats.playerData.sceneName = SceneManager.GetActiveScene().name;
-        
+
         // if (!updateTargets.Equals(false)){
-        //     //if (selectionUI != null) 
+        //     //if (selectionUI != null)
             //GameObject.Find("UIManager").GetComponentInChildren<SelectionUI>().enabled = true;
              selectionUI = GameObject.Find("UIManager").GetComponent<SelectionUI>();
              //Debug.Log(selectionUI);
@@ -234,7 +234,7 @@ public class GameManager : MonoBehaviour
              this.currentPrefab = locatePlayerPrefab();
              //Debug.Log(locatePlayerPrefab());
             //playerStatsJSON.name = "currentPlayer.name";
-            //playerStatsJSON.score = "100"; 
+            //playerStatsJSON.score = "100";
             //playerStats.playerData.
             //playerStatsJSON = JsonUtility.ToJson(playerStats);
             //Debug.Log(playerStatsJSON);
@@ -247,7 +247,7 @@ public GameObject findPlayer(){
         if (!gameStarted) return null;
     // Debug.Log("Firing " + gameObject.name +".findPlayer() method");
     spawnIndex = FindSpawnByName(spawnName);
-    
+
 	GameObject[] found = GameObject.FindGameObjectsWithTag("Player");
 	foreach ( GameObject tmp in found){
 		if (tmp.GetComponent<ShipControls>() != null){
@@ -264,11 +264,11 @@ public GameObject findPlayer(){
             shipControls = player.GetComponent<ShipControls>();
             shipControls.hoverHeight = hoverHeight;
             return player;
-            break;
+            //break;
         case locationType.Air:
             player =  Instantiate(spacePrefab, SpawnPoints[spawnIndex].transform.position - hoverPlayer, SpawnPoints[spawnIndex].transform.rotation);
             return player;
-            break;
+            //break;
         case locationType.Ground:
             canLand = true;
             player =  Instantiate(groundPrefab, SpawnPoints[spawnIndex].transform.position + besideShip, SpawnPoints[spawnIndex].transform.rotation);
@@ -278,7 +278,7 @@ public GameObject findPlayer(){
             Destroy(shipNoMove.GetComponentInChildren<Shoot>());
                     //Destroy(shipNoMove.GetComponent<LandControl>());
             Destroy(shipNoMove.GetComponent<TakeOffControl>());
-    
+
             Vector3 down = shipNoMove.transform.TransformDirection(Vector3.down);
             RaycastHit hit;
             if (Physics.Raycast(shipNoMove.transform.position, down, out hit))
@@ -292,16 +292,16 @@ public GameObject findPlayer(){
                     m_MyPosition.Set(shipNoMove.transform.position.x, shipNoMove.transform.position.y - (float)hit.distance, shipNoMove.transform.position.z);
                     shipNoMove.transform.position = m_MyPosition;
                 }
-             
+
             return player;
-            break;
+            //break;
     }
 	return null;
 }
 
 public void landPlayerShip(){
     //Debug.Log("landing ship");
-    
+
                     follow.offset_move = new Vector3(0, _mainOffset, 0);
                     //GameObject shipNoMove = Instantiate(spacePrefab, SpawnPoints[spawnIndex].transform.position - landShip, SpawnPoints[spawnIndex].transform.rotation);
                     if (!shipSave)
@@ -337,7 +337,7 @@ public void landPlayerShip(){
                     shipNoMove.tag = null;
                     //player = Instantiate(playerPrefab, SpawnPoints[spawnIndex].transform.position + besideShip - landPerson, SpawnPoints[spawnIndex].transform.rotation);
                     currentPrefab = Instantiate(groundPrefab, SpawnPoints[spawnIndex].transform.position + besideShip, SpawnPoints[spawnIndex].transform.rotation);
-                    
+
 }
     GameObject locatePlayerPrefab(){
         GameObject[] found = GameObject.FindGameObjectsWithTag("Player");
@@ -356,12 +356,12 @@ public void landPlayerShip(){
         if (Input.GetKeyDown(KeyCode.Z)) { // load
             playerData.LoadData();
         }
-        
+
         if (Input.GetKeyDown(KeyCode.C)) { // save
             playerData.SaveData();
         }
 
-       
+
        // Debug.Log(findPlayer());
         if (isLanding){
             //landPlayerShip();
@@ -374,14 +374,14 @@ public void landPlayerShip(){
             count = 0;
         }
 
-        if (locatePlayerPrefab() == null){                 
+        if (locatePlayerPrefab() == null){
                  _SpawnPlayer();
                  currentPrefab = findPlayer();
             }
         if (GameObject.FindWithTag("Player") != null)
 		{
 			prefabLocation = currentPrefab.transform;
-            
+
 			//GameObject.FindWithTag("Player").transform;
 		}
         //if (prefabLocation == null) spawnName = "none";
@@ -410,7 +410,7 @@ public void landPlayerShip(){
 
     public void newLandingCode(){
         Debug.Log("New Landing Code Executing");
-        
+
         playerShipPosition = currentPrefab.transform;
          Vector3 down = playerShipPosition.TransformDirection(Vector3.down);
                     RaycastHit hit;
@@ -429,7 +429,7 @@ public void landPlayerShip(){
                         temp.GetComponent<ShipControls>().playerControl = false;
                     }
                     //GameObject.Find(spawnName).SetActive(false);
-                    
+
         //isLanding = true;
     }
 
@@ -449,4 +449,3 @@ public void landPlayerShip(){
         //DontDestroyOnLoad(this.gameObject);
     }
 }
-
