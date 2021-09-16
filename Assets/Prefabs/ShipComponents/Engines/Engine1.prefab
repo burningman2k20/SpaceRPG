@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8874444131430883486}
   - component: {fileID: 8874444131430883487}
+  - component: {fileID: -3703361062683840513}
   m_Layer: 0
   m_Name: Engine1
   m_TagString: Untagged
@@ -41,5 +42,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 23640748c35454a498c155bdcfd9baef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  forwardThrust: 5000
+  backwardThrust: 2500
+--- !u!114 &-3703361062683840513
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8874444131430883480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02e3885cdb10b9a41a4ea962be8f9137, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
