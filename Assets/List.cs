@@ -27,9 +27,11 @@ public class List : MonoBehaviour
 				foreach(QuantumTek.QuantumInventory.QI_ItemData entry in itemDatabase.Items)
 		{
 
+			if (inventory.GetStock(entry.name)>0){
 				Debug.Log(entry);
-				list.GetComponent<Text>().text += itemDatabase.GetItem(entry.name).name + "\n";
+				//list.GetComponent<Text>().text += itemDatabase.GetItem(entry.name).name + "\n";
 				Debug.Log(entry.name + " -> " + inventory.GetStock(entry.name));
+			}
 				// do something with entry.Value or entry.Key
 		}
 

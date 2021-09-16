@@ -14,6 +14,11 @@ public class GameManager : MonoBehaviour
     public Transform playerShipPosition;
     public string playerStatsJSON;
 
+	public QuantumTek.QuantumInventory.QI_Inventory inventory;
+	public QuantumTek.QuantumInventory.QI_ItemDatabase itemDatabase;
+	public Dictionary<string, QuantumTek.QuantumInventory.QI_ItemData> items = new Dictionary<string, QuantumTek.QuantumInventory.QI_ItemData>();
+
+
     [Header("Managers")]
     [SerializeField] public SpawnManager spawnManager;
     [SerializeField] public PrefabManager prefabManager;
