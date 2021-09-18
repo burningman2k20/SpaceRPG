@@ -107,3 +107,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: 1
+  interact: 0
+  inventory: {fileID: 0}
+  itemDatabase: {fileID: 11400000, guid: 59dc492437a0c4e0a8ba5acbefee8c14, type: 2}
