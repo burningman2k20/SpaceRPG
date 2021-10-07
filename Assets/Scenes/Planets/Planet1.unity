@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.4453451, g: 0.4949938, b: 0.5739761, a: 1}
+  m_IndirectSpecularColor: {r: 0.44534487, g: 0.49499357, b: 0.5739757, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -752,12 +752,15 @@ MonoBehaviour:
   Kind: 2
   Status: 0
   Target: {fileID: 257184785}
+  TargetName: 
   _Target: 
   visible: 0
   NextObjective: {fileID: 0}
+  NextObjectiveName: 
   ActionsOnReach: 00000000
   animator: {fileID: 0}
   TriggerName: 
+  index: 0
 --- !u!1 &263677671
 GameObject:
   m_ObjectHideFlags: 0
@@ -1123,6 +1126,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Start
+      objectReference: {fileID: 0}
+    - target: {fileID: 2045607580948139281, guid: 3b15d688667e1854e86f0525fd7c884a,
+        type: 3}
+      propertyPath: Location
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2045607580948139281, guid: 3b15d688667e1854e86f0525fd7c884a,
+        type: 3}
+      propertyPath: gameStarted
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2045607580948139281, guid: 3b15d688667e1854e86f0525fd7c884a,
+        type: 3}
+      propertyPath: showObjectiveUI
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2045607580948139286, guid: 3b15d688667e1854e86f0525fd7c884a,
         type: 3}

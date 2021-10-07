@@ -28,14 +28,14 @@ MonoBehaviour:
       Progress: 0
       MaxProgress: 3
       Optional: 0
-      Completed: 1
+      Completed: 0
     - ID: 3
       Name: Buy Tomatoes
       Description: 
       NextTasks: 
       Progress: 0
       MaxProgress: 3
-      Optional: 1
+      Optional: 0
       Completed: 0
     - ID: 4
       Name: Steal Tomatoes

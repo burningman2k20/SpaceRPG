@@ -16,6 +16,7 @@ public class SpawnManager : MonoBehaviour
 
      public int FindSpawnByName(string _name)
     {
+		refreshSpawnPoints();
         for (int index = 0; index < SpawnPoints.Length; index++)
         {
             if (SpawnPoints[index].name == _name) return index;
@@ -62,6 +63,9 @@ public class SpawnManager : MonoBehaviour
 
     }
 
+void refreshSpawnPoints(){
+	SpawnPoints = GameObject.FindGameObjectsWithTag("SpawnPoint");
+}
     // Update is called once per frame
     void Update()
     {

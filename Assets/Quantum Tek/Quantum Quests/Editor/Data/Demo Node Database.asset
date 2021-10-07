@@ -13,14 +13,14 @@ MonoBehaviour:
   m_Name: Demo Node Database
   m_EditorClassIdentifier: 
   DataDB: {fileID: 11400000, guid: e7d676327c0174a7aaf35fd634634ec7, type: 2}
-  NextID: 5
+  NextID: 6
   Nodes:
   - ID: 0
     Type: 1
     Window:
       serializedVersion: 2
-      x: 39
-      y: 72
+      x: 16
+      y: 43
       width: 300
       height: 125
     Inputs: []

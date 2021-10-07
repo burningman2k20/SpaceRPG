@@ -4,61 +4,92 @@ using System.Linq;
 using System.Linq.Expressions;
 using UnityEngine.SceneManagement;
 
-public class Objective : MonoBehaviour
+
+public enum ObjectiveType
 {
+	Reach = 0,
+	Talk = 1,
+	Defeat = 2,
+}
+
+public enum ObjectiveStatus
+{
+	Pending = 0,
+	Achieved = 1,
+}
+
+public enum ActionOnReach
+{
+	MarkAsAchieved = 0,
+	PlayCinematic = 1,
+	PlayAnimation = 2,
+	SetTrigger = 3,
+}
+[System.Serializable]
+public class ObjectiveData {
+	public string whichScene = "";
 
 
-    public string whichScene = "";
-    public enum ObjectiveType
-    {
-        Reach = 0,
-        Talk = 1,
-        Defeat = 2,
-    }
-
-    public enum ObjectiveStatus
-    {
-        Pending = 0,
-        Achieved = 1,
-    }
-
-    public enum ActionOnReach
-    {
-        MarkAsAchieved = 0,
-        PlayCinematic = 1,
-        PlayAnimation = 2,
-        SetTrigger = 3,
-    }
-
-    public string Name;
+    public string Name = "";
     public bool selected;
     [Multiline(10)]
     public string Description;
     public ObjectiveType Kind;
     public ObjectiveStatus Status;
     public GameObject Target;
+	public string TargetName;
     public string _Target;
     public bool visible;
     public Objective NextObjective;
+	public string NextObjectiveName;
     public ActionOnReach[] ActionsOnReach;
     public Animator animator;
     //public MovieTexture ClipToPlay;
     public string TriggerName;
+	public int index;
 
-    private void OnReach()
+	public ObjectiveData(){
+		//return ObjectiveData;
+	}
+}
+
+public class Objective : MonoBehaviour
+{
+	public string whichScene = "";
+	public string Name = "";
+	public bool selected;
+	[Multiline(5)]
+	public string Description;
+	public ObjectiveType Kind;
+	public ObjectiveStatus Status;
+	public GameObject Target;
+	public string TargetName;
+	public string _Target;
+	public bool visible;
+	public Objective NextObjective;
+	public string NextObjectiveName;
+	public ActionOnReach[] ActionsOnReach;
+	public Animator animator;
+	//public MovieTexture ClipToPlay;
+	public string TriggerName;
+	public int index;
+
+	//public ObjectiveData objective;
+
+	private void OnReach()
     {
-        if (this.ActionsOnReach.Contains(ActionOnReach.MarkAsAchieved)){
-            this.Status = ObjectiveStatus.Achieved;
+        if (ActionsOnReach.Contains(ActionOnReach.MarkAsAchieved)){
+            Status = ObjectiveStatus.Achieved;
         }
-        if (this.ActionsOnReach.Contains(ActionOnReach.PlayCinematic))
+        if (ActionsOnReach.Contains(ActionOnReach.PlayCinematic))
             this.PlayCinematic();
-        if (this.ActionsOnReach.Contains(ActionOnReach.PlayAnimation))
+        if (ActionsOnReach.Contains(ActionOnReach.PlayAnimation))
             this.PlayAnimation();
-        if (this.ActionsOnReach.Contains(ActionOnReach.SetTrigger))
+        if (ActionsOnReach.Contains(ActionOnReach.SetTrigger))
             Debug.Log("trigger something");
         //this.NextObjective.Target.GetComponentInParent<Animator>().SetTrigger(this.TriggerName);
 
-        ParentScript.CurrentObjective = this.NextObjective;
+        ParentScript.CurrentObjective = NextObjective;
 
     }
 
@@ -84,4 +115,5 @@ public class Objective : MonoBehaviour
     }
 
     public Objectives ParentScript { get; set; }
+	//public
 }

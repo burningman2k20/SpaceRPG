@@ -88,9 +88,9 @@ public class GameManager : MonoBehaviour
 
     int FindSpawnByName(string _name)
     {
-        for (int index = 0; index < SpawnPoints.Length; index++)
+        for (int index = 0; index < spawnManager.SpawnPoints.Length; index++)
         {
-            if (SpawnPoints[index].name == _name) return index;
+            if ( spawnManager.SpawnPoints[index].name == _name) return index;
         }
         return -1;
     }
@@ -104,12 +104,16 @@ public class GameManager : MonoBehaviour
 
     public void _SpawnPlayer()
     {
-        spawnIndex = FindSpawnByName(spawnName);
-             if (findPlayer() == null){
+		//spawnManager.refreshSpawnPoints();
+        spawnIndex = spawnManager.FindSpawnByName(spawnName);
+              //if (findPlayer() == null){
+				//  Debug.Log("no player found");
+             //    currentPrefab = Instantiate(spacePrefab, SpawnPoints[spawnIndex].transform.position - hoverPlayer, SpawnPoints[spawnIndex].transform.rotation);
+              //} else {
+			//	  Debug.Log("player found");
+             // 	currentPrefab = findPlayer();
+			  //}
 
-                //currentPrefab = Instantiate(spacePrefab, SpawnPoints[spawnIndex].transform.position - hoverPlayer, SpawnPoints[spawnIndex].transform.rotation);
-             }
-             currentPrefab = findPlayer();
              //return;
         // if (playerLocation == locationType.Space || playerLocation == locationType.Air){
 
@@ -135,22 +139,23 @@ public class GameManager : MonoBehaviour
         // if (isLanding)
         // {
 
-            spawnIndex = FindSpawnByName(spawnName);
+            spawnIndex = spawnManager.FindSpawnByName(spawnName);
             //spawnName = "none";
 
             //camOffset = mainCamOffset;
             if (spawnIndex != -1)
             {
-                // if (playerLocation == locationType.Space)
-                // {
+				player = GameObject.FindWithTag("Player");
+                 if (playerLocation == locationType.Space)
+                 {
                 //     //Vector3 spawn = new Vector3()
 
-                //     //player = Instantiate(spacePrefab, SpawnPoints[spawnIndex].transform.position - (hoverPlayer * 2), SpawnPoints[spawnIndex].transform.rotation);
-                //     currentPrefab = Instantiate(spacePrefab, SpawnPoints[spawnIndex].transform.position, SpawnPoints[spawnIndex].transform.rotation);
-                //     shipControls = player.GetComponent<ShipControls>();
-                //     shipControls.hoverHeight = hoverHeight;
+                    player = Instantiate(spacePrefab, spawnManager.SpawnPoints[spawnIndex].transform.position - (hoverPlayer * 2), spawnManager.SpawnPoints[spawnIndex].transform.rotation);
+                     //currentPrefab = Instantiate(spacePrefab, SpawnPoints[spawnIndex].transform.position, SpawnPoints[spawnIndex].transform.rotation);
+                    shipControls = player.GetComponent<ShipControls>();
+                    shipControls.hoverHeight = hoverHeight;
 
-                // }
+                 }
 
                 if (playerLocation == locationType.Air)
                 {
@@ -159,7 +164,7 @@ public class GameManager : MonoBehaviour
                     //     //spawnIndex = -1;
                     //     //spawnName = "none";
                     // }
-                    currentPrefab = Instantiate(spacePrefab, SpawnPoints[spawnIndex].transform.position - hoverPlayer, SpawnPoints[spawnIndex].transform.rotation);
+                    player = Instantiate(spacePrefab, spawnManager.SpawnPoints[spawnIndex].transform.position - hoverPlayer, spawnManager.SpawnPoints[spawnIndex].transform.rotation);
                     shipControls = player.GetComponent<ShipControls>();
                     shipControls.hoverHeight = airHoverHeight;
                     //GameObject.Find(spawnName).SetActive(true);
@@ -172,7 +177,7 @@ public class GameManager : MonoBehaviour
 
                 if (playerLocation == locationType.Building)
                 {
-                    currentPrefab = Instantiate(groundPrefab, SpawnPoints[spawnIndex].transform.position, SpawnPoints[spawnIndex].transform.rotation);
+                    player = Instantiate(groundPrefab, spawnManager.SpawnPoints[spawnIndex].transform.position, spawnManager.SpawnPoints[spawnIndex].transform.rotation);
                     //camOffset = buildingCamOffset;
                     follow.offset_move = new Vector3(0, _buildingOffset, 0);
                 }
@@ -205,7 +210,7 @@ public class GameManager : MonoBehaviour
         prefabManager = GameObject.Find("PrefabManager").GetComponent<PrefabManager>();
         spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
 
-        follow = GameObject.Find("Main Camera").GetComponent<CamFollow>();
+        follow = GameObject.Find("MainCamera").GetComponent<CamFollow>();
         mapFollow = GameObject.Find("MapCamera").GetComponent<CamFollow>();
 		//playerStats = GameObject.Find("GameManager").GetComponent<PlayerStats>();
 
@@ -217,7 +222,7 @@ public class GameManager : MonoBehaviour
     {
         //spawnName = "none";
         //SpawnPlayer();
-        //print("Loaded : " + scene.name);
+        print("Loaded : " + scene.name);
 
     }
 
@@ -236,7 +241,7 @@ public class GameManager : MonoBehaviour
              selectionUI = GameObject.Find("UIManager").GetComponent<SelectionUI>();
              //Debug.Log(selectionUI);
              selectionUI.FindSelectionObjects();
-             this.currentPrefab = locatePlayerPrefab();
+             //this.currentPrefab = locatePlayerPrefab();
              //Debug.Log(locatePlayerPrefab());
             //playerStatsJSON.name = "currentPlayer.name";
             //playerStatsJSON.score = "100";
@@ -249,11 +254,31 @@ public class GameManager : MonoBehaviour
     }
 
 public GameObject findPlayer(){
-        if (!gameStarted) return null;
+	GameObject find = GameObject.Find("Player");
+	if (find == null){
+	Debug.Log("no player found");
+	//_SpawnPlayer();
+	//find = GameObject.Find("Player");
+} else {
+	Debug.Log("player found");
+	//return find;
+}
+
+return find;
+        //if (!gameStarted) return null;
     // Debug.Log("Firing " + gameObject.name +".findPlayer() method");
-    spawnIndex = FindSpawnByName(spawnName);
+    spawnIndex = spawnManager.FindSpawnByName(spawnName);
 
 	GameObject[] found = GameObject.FindGameObjectsWithTag("Player");
+	if (found == null) {
+		GameObject tmp = Instantiate(spacePrefab, spawnManager.SpawnPoints[spawnIndex].transform.position - hoverPlayer, spawnManager.SpawnPoints[spawnIndex].transform.rotation);
+		if (tmp.GetComponent<ShipControls>() != null){
+			if (tmp.GetComponent<ShipControls>().playerControl) return tmp;
+
+		} else if (tmp.GetComponent<SimpleTankController>() != null){
+			if (tmp.GetComponent<SimpleTankController>().playerControl) return tmp;
+		}
+	}
 	foreach ( GameObject tmp in found){
 		if (tmp.GetComponent<ShipControls>() != null){
 			if (tmp.GetComponent<ShipControls>().playerControl) return tmp;
@@ -265,19 +290,19 @@ public GameObject findPlayer(){
     if (SpawnPoints.Length<=0) return null;
     switch (playerLocation){
         case locationType.Space:
-            player = Instantiate(spacePrefab, SpawnPoints[spawnIndex].transform.position - hoverPlayer, SpawnPoints[spawnIndex].transform.rotation);
+            player = Instantiate(spacePrefab, spawnManager.SpawnPoints[spawnIndex].transform.position - hoverPlayer, spawnManager.SpawnPoints[spawnIndex].transform.rotation);
             shipControls = player.GetComponent<ShipControls>();
             shipControls.hoverHeight = hoverHeight;
             return player;
             //break;
         case locationType.Air:
-            player =  Instantiate(spacePrefab, SpawnPoints[spawnIndex].transform.position - hoverPlayer, SpawnPoints[spawnIndex].transform.rotation);
+            player =  Instantiate(spacePrefab, spawnManager.SpawnPoints[spawnIndex].transform.position - hoverPlayer, spawnManager.SpawnPoints[spawnIndex].transform.rotation);
             return player;
             //break;
         case locationType.Ground:
             canLand = true;
-            player =  Instantiate(groundPrefab, SpawnPoints[spawnIndex].transform.position + besideShip, SpawnPoints[spawnIndex].transform.rotation);
-            shipNoMove = Instantiate(spacePrefab, SpawnPoints[spawnIndex].transform.position, SpawnPoints[spawnIndex].transform.rotation);
+            player =  Instantiate(groundPrefab, spawnManager.SpawnPoints[spawnIndex].transform.position + besideShip, spawnManager.SpawnPoints[spawnIndex].transform.rotation);
+            shipNoMove = Instantiate(spacePrefab, spawnManager.SpawnPoints[spawnIndex].transform.position, spawnManager.SpawnPoints[spawnIndex].transform.rotation);
             shipNoMove.GetComponent<ShipControls>().playerControl = false;
             Destroy(shipNoMove.GetComponent<ShipControls>());
             Destroy(shipNoMove.GetComponentInChildren<Shoot>());
@@ -311,7 +336,7 @@ public void landPlayerShip(){
                     //GameObject shipNoMove = Instantiate(spacePrefab, SpawnPoints[spawnIndex].transform.position - landShip, SpawnPoints[spawnIndex].transform.rotation);
                     if (!shipSave)
                     {
-                        shipNoMove = Instantiate(spacePrefab, SpawnPoints[spawnIndex].transform.position, SpawnPoints[spawnIndex].transform.rotation);
+                        shipNoMove = Instantiate(spacePrefab, spawnManager.SpawnPoints[spawnIndex].transform.position, spawnManager.SpawnPoints[spawnIndex].transform.rotation);
                     }
                     else
                     {
@@ -341,14 +366,17 @@ public void landPlayerShip(){
                     shipNoMove.GetComponent<Rigidbody>().useGravity = true;
                     shipNoMove.tag = null;
                     //player = Instantiate(playerPrefab, SpawnPoints[spawnIndex].transform.position + besideShip - landPerson, SpawnPoints[spawnIndex].transform.rotation);
-                    currentPrefab = Instantiate(groundPrefab, SpawnPoints[spawnIndex].transform.position + besideShip, SpawnPoints[spawnIndex].transform.rotation);
+                    currentPrefab = Instantiate(groundPrefab, spawnManager.SpawnPoints[spawnIndex].transform.position + besideShip, spawnManager.SpawnPoints[spawnIndex].transform.rotation);
+					follow.target = locatePlayerPrefab().transform;
+					mapFollow.target = locatePlayerPrefab().transform;
 
 }
-    GameObject locatePlayerPrefab(){
+    public GameObject locatePlayerPrefab(){
         GameObject[] found = GameObject.FindGameObjectsWithTag("Player");
 	foreach ( GameObject tmp in found){
 		if (tmp.GetComponent<ShipControls>() != null || tmp.GetComponent<SimpleTankController>() != null){
                 playerData.data.myGameObject = tmp;
+				currentPrefab = tmp;
 			    return tmp;
             }
 	    }
@@ -358,6 +386,7 @@ public void landPlayerShip(){
     void Update()
     {
 
+		if (!gameStarted) return;
         if (Input.GetKeyDown(KeyCode.Z)) { // load
             playerData.LoadData();
         }
@@ -367,7 +396,7 @@ public void landPlayerShip(){
         }
 
 
-       // Debug.Log(findPlayer());
+        //Debug.Log(findPlayer());
         if (isLanding){
             //landPlayerShip();
             if (playerLocation == locationType.Ground) {
@@ -379,10 +408,10 @@ public void landPlayerShip(){
             count = 0;
         }
 
-        if (locatePlayerPrefab() == null){
-                 _SpawnPlayer();
-                 currentPrefab = findPlayer();
-            }
+         if (locatePlayerPrefab() == null){
+                  _SpawnPlayer();
+                  currentPrefab =  findPlayer();
+             }
         if (GameObject.FindWithTag("Player") != null)
 		{
 			prefabLocation = currentPrefab.transform;
@@ -441,16 +470,17 @@ public void landPlayerShip(){
     void Awake()
     {
         selectionUI = GameObject.Find("UIManager").GetComponent<SelectionUI>();
+		//spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
         selectionUI.FindSelectionObjects();
         //GameObject.Find("UIManager").GetComponent<SelectionUI>().FindSelectionObjects();
         //Debug.Log("Awake");
-        if (!this.findPlayer())  _SpawnPlayer();
+        //if (spawnManager.findPlayer() == null)  _SpawnPlayer();
         // spawnName = "none";
-        // follow2 = GameObject.Find("Main Camera").GetComponent<CamFollow>();
-        // mapFollow = GameObject.Find("MapCamera").GetComponent<CamFollow>();
+         follow = GameObject.Find("Main Camera").GetComponent<CamFollow>();
+         mapFollow = GameObject.Find("MapCamera").GetComponent<CamFollow>();
 
-        // follow2.target = playerPrefab.transform;
-        // mapFollow.target = playerPrefab.transform;
+         follow.target = currentPrefab.transform;
+         mapFollow.target = currentPrefab.transform;
         //DontDestroyOnLoad(this.gameObject);
     }
 }

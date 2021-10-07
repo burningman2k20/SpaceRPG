@@ -14,22 +14,76 @@ public class ObjectiveUI : MonoBehaviour
     {
         if (showUI)
         {
-            foreach (GameObject obj in GameObject.Find("Objectives").GetComponent<ObjectivesList>().objectiveList)
+			//GameObject.Find("Objectives").GetComponent<ObjectivesList>().ReadFile();
+			if (GUILayout.Button("Load")){
+				GameObject.Find("Objectives").GetComponent<ObjectivesList>().ReadFile();
+			}
+			GUILayout.BeginHorizontal();
+			GUILayout.Box("Select");
+			GUILayout.Box("Obj Name");
+			GUILayout.Box("Description");
+			GUILayout.Box("Pending?");
+			GUILayout.EndHorizontal();
+			foreach (MainObjectiveList obj in GameObject.Find("Objectives").GetComponent<ObjectivesList>().masterObjectiveList)
             {
-                Objective objective=obj.GetComponent<Objective>();
-                GUILayout.BeginHorizontal();
-                if (!objective.selected && GUILayout.Button("Select")) {
-					obj.GetComponent<Target>().enabled = true;
+				GUILayout.BeginHorizontal();
+				if (GameObject.Find(obj._objectiveObjectName)) {
+
+				GameObject go = GameObject.Find(obj._objectiveObjectName);
+				Objective objective=go.GetComponent<Objective>();
+
+				if (!go.GetComponent<Target>().enabled && GUILayout.Button("Select")) {
+					go.GetComponent<Target>().enabled = true;
                     objective.selected = true;
                 }
-                if (objective.selected && GUILayout.Button("Deselect")) {
-					obj.GetComponent<Target>().enabled = false;
+				if (go.GetComponent<Target>().enabled && GUILayout.Button("Deselect")) {
+					go.GetComponent<Target>().enabled = false;
                     objective.selected = false;
                 }
-                GUILayout.Box(obj.GetComponent<Objective>().name);
-                GUILayout.Box(obj.GetComponent<Objective>().Status.ToString());
-                GUILayout.EndHorizontal();
-            }
+
+				GUILayout.Box(obj._objectiveObjectName);
+				GUILayout.Box(" -> this object exists in this scene");
+				GUILayout.Box(objective.Name);
+				GUILayout.Box(objective.Status.ToString());
+				} else {
+					GUILayout.Box("Select");
+					GUILayout.Box(obj._objectiveObjectName);
+					GUILayout.Box(" -> this object does not exist in this scene");
+				//	GUILayout.EndHorizontal();
+				}
+
+				// GUILayout.BeginHorizontal();
+                // if (!objective.selected && GUILayout.Button("Select")) {
+				// 	obj.GetComponent<Target>().enabled = true;
+                //     objective.selected = true;
+                // }
+                // if (objective.selected && GUILayout.Button("Deselect")) {
+				// 	obj.GetComponent<Target>().enabled = false;
+                //     objective.selected = false;
+                // }
+
+                 GUILayout.EndHorizontal();
+			}
+
+            // foreach (GameObject obj in GameObject.Find("Objectives").GetComponent<ObjectivesList>().objectiveList)
+            // {
+            //     Objective objective=obj.GetComponent<Objective>();
+			// 	//ObjectiveData objData = new ObjectiveData();
+			// 	//objData.Name = objective.Name;
+			// 	//Debug.Log(objData.Name);
+            //     GUILayout.BeginHorizontal();
+            //     if (!objective.selected && GUILayout.Button("Select")) {
+			// 		obj.GetComponent<Target>().enabled = true;
+            //         objective.selected = true;
+            //     }
+            //     if (objective.selected && GUILayout.Button("Deselect")) {
+			// 		obj.GetComponent<Target>().enabled = false;
+            //         objective.selected = false;
+            //     }
+            //     GUILayout.Box(objective.Name);
+            //     GUILayout.Box(objective.Status.ToString());
+            //     GUILayout.EndHorizontal();
+            // }
         }
 
     }

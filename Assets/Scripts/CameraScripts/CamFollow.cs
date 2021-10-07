@@ -16,7 +16,7 @@ public class CamFollow : MonoBehaviour
         //gameManager.enabled= true;
         if (target)
         {
-            offset_move = transform.position - target.position;
+            //offset_move = transform.position - target.position;
         }
         //Debug.Log("offset" + offset_move);
     }
@@ -25,18 +25,29 @@ public class CamFollow : MonoBehaviour
     {
         if (gameManager == null) gameManager = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
         if (!gameManager.gameStarted) return;
+
+		//Debug.Log(target);
+
         if (target.Equals(null))
         {
-            target = gameManager.findPlayer().transform;
+            //target = gameManager.findPlayer().transform;
             //if (target.)
-            target = GameObject.Find(gameManager.currentPrefab.name + "(Clone)").transform;
-            //transform.position = new Vector3(target.position.x, offset_move.y, target.position.y);
-            offset_move = transform.position - target.position;
+            target = gameManager.locatePlayerPrefab().transform;
+			Debug.Log(target);
+            //transform.position = new Vector3(0, offset_move.y, 0);
+			//if (gameManager.playerLocation == locationType.Ground){
+			//	target.position.x = -3;
+			//} else {
+			//	target.position.x = 0;
+			//}
+            //offset_move = transform.position - target.position;
+			//offset_move = new Vector3(0, offset_move.y, 0);
             //Debug.Log("Found player");
             transform.position = target.position + offset_move;
         }
         if (!target.Equals(null))
         {
+			target = gameManager.locatePlayerPrefab().transform;
             //transform.position = new Vector3(target.position.x, offset_move.y, target.position.y);
             transform.position = target.position + offset_move;
         }
@@ -50,6 +61,10 @@ public class CamFollow : MonoBehaviour
 
     void Awake()
     {
+		if (target)
+        {
+            //offset_move = transform.position - target.position;
+        }
         //  DontDestroyOnLoad(this.gameObject);
     }
 }

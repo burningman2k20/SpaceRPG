@@ -56,9 +56,11 @@ void Update(){
     /// <param name="GameObject"></param>
     public bool getObjective(GameObject obj){
           //foreach(Objective _obj in targets){
-
+		  //GameObject temp = GameObject.GetComponent<Objective>().objective.targetName);
           //}
+		  //if (temp != null)
           return obj.GetComponent<Objective>().selected;
+		  //else return false;
         //return false;
     }
 
@@ -70,7 +72,7 @@ void Update(){
         foreach(Target target in targets)
         {
             if (target.indicator != null){
-                
+				Debug.Log(target.gameObject);
                 bool GOenabled = getObjective(target.gameObject);
                 //Debug.Log(enabled);
                 if (GOenabled) {
@@ -83,12 +85,12 @@ void Update(){
                 //Debug.Log("Nothing");
             }
 
-            
 
-            
+
+
             //Debug.Log(target.isCompleted);
             //   SelectionUI select = GameObject.Find("UIManager").GetComponent<SelectionUI>();
-           
+
         //    if (target.indicator != null && select.target != null) {
         //        target.indicator.Activate(false);
         //    } else
@@ -106,8 +108,8 @@ void Update(){
         //             clr = target.TargetColor;
         //     //        //target.indicator.Activate(false);
         //         }
-            
-            
+
+
             Vector3 screenPosition = OffScreenIndicatorCore.GetScreenPosition(camera, target.transform.position);
             bool isTargetVisible = OffScreenIndicatorCore.IsTargetVisible(screenPosition);
             float distanceFromCamera = target.NeedDistanceText ? target.GetDistanceFromCamera(camera.transform.position) : float.MinValue;// Gets the target distance from the camera.
@@ -124,8 +126,8 @@ void Update(){
                 OffScreenIndicatorCore.GetArrowIndicatorPositionAndAngle(ref screenPosition, ref angle, screenCentre, screenBounds);
                 indicator = GetIndicator(ref target.indicator, IndicatorType.ARROW); // Gets the arrow indicator from the pool.
                 indicator.transform.rotation = Quaternion.Euler(0, 0, angle * Mathf.Rad2Deg); // Sets the rotation for the arrow indicator.
-                
-            
+
+
             }
             else
             {
@@ -143,13 +145,13 @@ void Update(){
         //        target.indicator?.Activate(false);
         //         target.indicator = null;
         // }
-       
+
     }
     }
 
     /// <summary>
     /// 1. Add the target to targets list if <paramref name="active"/> is true.
-    /// 2. If <paramref name="active"/> is false deactivate the targets indicator, 
+    /// 2. If <paramref name="active"/> is false deactivate the targets indicator,
     ///     set its reference null and remove it from the targets list.
     /// </summary>
     /// <param name="target"></param>
@@ -170,10 +172,10 @@ void Update(){
 
     /// <summary>
     /// Get the indicator for the target.
-    /// 1. If its not null and of the same required <paramref name="type"/> 
+    /// 1. If its not null and of the same required <paramref name="type"/>
     ///     then return the same indicator;
-    /// 2. If its not null but is of different type from <paramref name="type"/> 
-    ///     then deactivate the old reference so that it returns to the pool 
+    /// 2. If its not null but is of different type from <paramref name="type"/>
+    ///     then deactivate the old reference so that it returns to the pool
     ///     and request one of another type from pool.
     /// 3. If its null then request one from the pool of <paramref name="type"/>.
     /// </summary>
@@ -189,7 +191,7 @@ void Update(){
                 indicator.Activate(false);
                 indicator = type == IndicatorType.BOX ? BoxObjectPool.current.GetPooledObject() : ArrowObjectPool.current.GetPooledObject();
                 indicator.Activate(true); // Sets the indicator as active.
-                
+
             }
         }
         else

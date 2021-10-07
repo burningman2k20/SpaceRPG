@@ -8,6 +8,8 @@ public class Item : MonoBehaviour
     public itemType item;
 	public interactType interact;
 	public QuantumTek.QuantumInventory.QI_Inventory inventory;
+	public QuantumTek.QuantumInventory.QI_ItemData itemData;
+
 	public QuantumTek.QuantumInventory.QI_ItemDatabase itemDatabase;
 
 	GameObject trigger_object;

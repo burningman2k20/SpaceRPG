@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine.UI;
 
 public class Objectives : MonoBehaviour
@@ -11,6 +12,17 @@ public class Objectives : MonoBehaviour
     [SerializeField] public Image CurrentObjectiveArrow;
 
     [SerializeField] public Text CurrentObjectiveDescription;
+
+ 	public string jsonFileName = "default.json";
+ 	public List<Objective> objectiveList = new List<Objective>();
+
+	public static ObjectiveData CreateFromJSON(string jsonString) {
+	        return JsonUtility.FromJson<ObjectiveData>(jsonString);
+	}
+
+	public string CreateJSON(ObjectiveData objectiveData) {
+        return JsonUtility.ToJson(objectiveData);
+    }
 
     void Start()
     {
