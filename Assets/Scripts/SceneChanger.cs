@@ -21,11 +21,13 @@ public class SceneChanger : MonoBehaviour
     public bool Visable = false;
 
     public string spawnName;
-    public GameObject playerPrefab;
+    //public GameObject playerPrefab;
 
     public string SceneName;
 
     public GameManager gameManager;
+	public PrefabManager prefabManager;
+	public SpawnManager spawnManager;
 
     public bool gui_visable = false;
 
@@ -51,8 +53,8 @@ public class SceneChanger : MonoBehaviour
 
             }
 
-            gameManager.sceneName = SceneName;
-            gameManager.spawnName = spawnName;
+            spawnManager.sceneName = SceneName;
+            spawnManager.spawnName = spawnName;
             SceneManager.LoadScene(SceneName);
 
             //}
@@ -81,13 +83,14 @@ public class SceneChanger : MonoBehaviour
     void Start()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+		spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (gameManager.currentPrefab.Equals(null)) return;
-        distance = Vector3.Distance(gameManager.currentPrefab.transform.position, this.transform.position);
+        if (prefabManager.currentPrefab.Equals(null)) return;
+        distance = Vector3.Distance(prefabManager.currentPrefab.transform.position, this.transform.position);
 
         if (distance < interact_distance)
         {
@@ -99,7 +102,7 @@ public class SceneChanger : MonoBehaviour
                 if (SceneName != "")
                 {
                     gameManager.playerLocation = GameDataTypes.locationType.Building;
-                    GameObject tempObject = GameObject.Find(gameManager.spacePrefab.name + "(Clone)");
+                    GameObject tempObject = GameObject.Find(prefabManager.spacePrefab.name + "(Clone)");
                     if (tempObject != null)
                     {
                         gameManager.shipSave = true;
@@ -111,7 +114,7 @@ public class SceneChanger : MonoBehaviour
                     }
                     //gm.UpdateData=true;
                     // gm.spawnIndex=0;
-                    gameManager.spawnName = spawnName;
+                    spawnManager.spawnName = spawnName;
                     SceneManager.LoadScene(SceneName);
                     //gm.SpawnPlayer();
                 }
@@ -139,5 +142,6 @@ public class SceneChanger : MonoBehaviour
     void Awake()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+		prefabManager = GameObject.Find("PrefabManager").GetComponent<PrefabManager>();
     }
 }

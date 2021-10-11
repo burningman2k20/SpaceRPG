@@ -93,7 +93,7 @@ public class MyEditor : EditorWindow {
 		GUILayout.EndHorizontal ();
 		GUILayout.BeginHorizontal();
         if (GUILayout.Button("Load Data")) {
-            ReadFile();
+            // ReadFile();
         }
         GUILayout.EndHorizontal();
         GUILayout.BeginHorizontal ();
@@ -103,12 +103,12 @@ public class MyEditor : EditorWindow {
 		GUILayout.Box ("Pending?");
 		GUILayout.EndHorizontal ();
 
-		GUILayout.BeginHorizontal ();
-		foreach(MainObjectiveList obj in masterObjectiveList){
-			GUILayout.BeginVertical ();
-			GUILayout.Box(obj._objectiveObjectName);
-			GUILayout.EndVertical ();
-		}GUILayout.EndHorizontal ();
+		// GUILayout.BeginHorizontal ();
+		// foreach(MainObjectiveList obj in masterObjectiveList){
+		// 	GUILayout.BeginVertical ();
+		// 	GUILayout.Box(obj._objectiveObjectName);
+		// 	GUILayout.EndVertical ();
+		// }GUILayout.EndHorizontal ();
 	}
 	// Start is called before the first frame update
 	void Start () {

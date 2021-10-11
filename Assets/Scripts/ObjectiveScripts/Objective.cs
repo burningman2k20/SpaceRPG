@@ -74,11 +74,18 @@ public class Objective : MonoBehaviour
 	public string TriggerName;
 	public int index;
 
+	ObjectivesList objectiveList;
+
 	//public ObjectiveData objective;
 
 	private void OnReach()
     {
+		objectiveList = GameObject.Find("Objectives").GetComponent<ObjectivesList>();
         if (ActionsOnReach.Contains(ActionOnReach.MarkAsAchieved)){
+			Debug.Log(this.name);
+			Debug.Log(this.TargetName);
+			//GameObject.Find(this.name).GetComponent<Objective>().Status = ObjectiveStatus.Achieved;
+			objectiveList.toggleCompleteObjective(this.name, true);
             Status = ObjectiveStatus.Achieved;
         }
         if (ActionsOnReach.Contains(ActionOnReach.PlayCinematic))
@@ -90,7 +97,7 @@ public class Objective : MonoBehaviour
         //this.NextObjective.Target.GetComponentInParent<Animator>().SetTrigger(this.TriggerName);
 
         ParentScript.CurrentObjective = NextObjective;
-
+		//objectiveList.WriteFile("", objectiveList.playerObjectiveList);
     }
 
     private void PlayAnimation()
@@ -106,7 +113,7 @@ public class Objective : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         Scene scene = SceneManager.GetActiveScene();
-        //Debug.Log(other.tag + "  -> " + this.ParentScript.CurrentObjective.name + "  -> " + this.name);
+        //Debug.Log("player = " + other.tag + " this object name -> " + gameObject.name + " current objective-> " + this.ParentScript.CurrentObjective.gameObject.name);
         //Debug.Log(scene.name);
         if (other.tag.Equals("Player") && this.ParentScript.CurrentObjective.name.Equals(this.name) && whichScene.Equals(scene.name))
         {

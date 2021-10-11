@@ -4,13 +4,13 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - GameManager
-  - SpawnPoint
-  - MapCamera
   - Controllers
-  - Enemy
+  - GameManager
+  - MapCamera
   - Objective
-  - Pointer
+  - SpawnPoint
+  - SpawnManager
+  - PrefabManager
   layers:
   - Default
   - TransparentFX

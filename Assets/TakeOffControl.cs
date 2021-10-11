@@ -5,6 +5,7 @@ using UnityEngine;
 public class TakeOffControl : MonoBehaviour
 {
     GameManager gameManager;
+	PrefabManager prefabManager;
 
     public bool takeOff = true;
     public float _distance;
@@ -14,6 +15,7 @@ public class TakeOffControl : MonoBehaviour
     void Start()
     {
         gameManager = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
+		prefabManager = GameObject.FindWithTag("PrefabManager").GetComponent<PrefabManager>();
 
     }
 
@@ -21,7 +23,7 @@ public class TakeOffControl : MonoBehaviour
     void Update()
     {
 
-        _distance = Vector3.Distance(GameObject.Find(gameManager.currentPrefab.name).transform.position, transform.position);
+        _distance = Vector3.Distance(GameObject.Find(prefabManager.currentPrefab.name).transform.position, transform.position);
 
         // if (gameManager.playerLocation != GameManager.Location_t.Space)
         // {

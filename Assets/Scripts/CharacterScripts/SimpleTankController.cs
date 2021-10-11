@@ -4,6 +4,8 @@ using static GameDataTypes;
 [RequireComponent (typeof (CharacterController))]
 public class SimpleTankController : MonoBehaviour {
     public GameManager gameManager;
+	public SpawnManager spawnManager;
+	public PrefabManager prefabManager;
 
     // Tank Controller
     public enum MoveDirection { Forward, Reverse, Stop }
@@ -57,6 +59,8 @@ public class SimpleTankController : MonoBehaviour {
         m_Transform = GetComponent<Transform> ();
 
         m_Controller = GetComponent<CharacterController> ();
+		//spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
+		//prefabManager = GameObject.Find("PrefabManager").GetComponent<PrefabManager>();
         currentTopSpeed = topForwardSpeed;
     }
 
@@ -71,18 +75,18 @@ public class SimpleTankController : MonoBehaviour {
 
     public void Update () {
 
-        if (Input.GetKeyDown (KeyCode.T) && gameManager.spawnName != "none") {
+        if (Input.GetKeyDown (KeyCode.T) && spawnManager.spawnName != "none") {
             if (gameManager.playerLocation == locationType.Building) return;
 
-			if (GameObject.Find (gameManager.spacePrefab.name + "(Clone)")) {
-				obj1 = GameObject.Find (gameManager.spacePrefab.name + "(Clone)").transform;
+			if (GameObject.Find (prefabManager.spacePrefab.name + "(Clone)")) {
+				obj1 = GameObject.Find (prefabManager.spacePrefab.name + "(Clone)").transform;
 				obj2 = transform;
 				_distance = Vector3.Distance (obj1.position, obj2.position);
-
+				Debug.Log(_distance);
 			if (_distance <= maxDistance) {
 
 					gameManager.playerLocation = locationType.Air;
-                    
+
 	                gameManager._SpawnPlayer (); //("same map");
                     gameManager.updateTargets = true;
 
@@ -213,7 +217,9 @@ public class SimpleTankController : MonoBehaviour {
     }
 
     void Start () {
-        gameManager = GameObject.FindWithTag ("GameManager").GetComponent<GameManager> ();
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager> ();
+		spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager> ();
+		prefabManager = GameObject.Find("PrefabManager").GetComponent<PrefabManager> ();
         //GameObject.Find("UIManager").GetComponent<SelectionUI>().FindSelectionObjects();
     }
 }

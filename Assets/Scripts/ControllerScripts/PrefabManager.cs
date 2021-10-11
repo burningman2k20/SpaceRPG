@@ -9,17 +9,23 @@ public class PrefabManager : MonoBehaviour
     }
     [Header("Player Prefabs")]
     [SerializeField] public GameObject[] playerPrefabs;
+	[SerializeField] public GameObject currentPrefab;
     [SerializeField] public GameObject groundPrefab;
     [SerializeField] public GameObject spacePrefab;
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
+    }
+
+	void Awake()
+    {
+        DontDestroyOnLoad(this.gameObject);
     }
 }

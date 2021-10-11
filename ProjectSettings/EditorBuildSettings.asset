@@ -6,21 +6,18 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: 6ff3b7e3504f175429159b33b2692b82
+  - enabled: 1
     path: Assets/Scenes/Galaxy/Space.unity
     guid: b238b34f031ff1145871ee6d9865f733
   - enabled: 1
     path: Assets/Scenes/Planets/Planet1.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 1
-    path: Assets/Scenes/Planets/planet2.unity
+    path: Assets/Scenes/Planets/Planet2.unity
     guid: 9eb4f996075d369428cabaa4651e5641
   - enabled: 1
-    path: Assets/Scenes/GameStart.unity
-    guid: e0b57c8b3e752a24bacc6153baebbeef
-  - enabled: 1
-    path: Assets/Scenes/Planets/planet1/building.unity
+    path: Assets/Scenes/Planets/Planet1/building.unity
     guid: 743cd2effbe1d6e47917cd76c815902f
-  - enabled: 1
-    path: Assets/Scenes/MainMenu.unity
-    guid: 6ff3b7e3504f175429159b33b2692b82
   m_configObjects: {}

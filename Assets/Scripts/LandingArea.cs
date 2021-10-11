@@ -5,6 +5,7 @@ using UnityEngine;
 public class LandingArea : MonoBehaviour
 {
     GameManager gameManager;
+	SpawnManager spawnManager;
     [Header("Spawn Data")]
     [SerializeField] public string spawnName;
     [SerializeField] public string airSpawn;
@@ -47,8 +48,8 @@ public class LandingArea : MonoBehaviour
     {
         if (GameObject.FindWithTag("Player").GetComponent<ShipControls>()) GameObject.FindWithTag("Player").GetComponent<ShipControls>().landingControl = true;
         displayUI = true;
-        gameManager.spawnName = spawnName;
-        gameManager.sceneName = sceneName;
+        spawnManager.spawnName = spawnName;
+        spawnManager.sceneName = sceneName;
         //if (GameObject.FindWithTag("GameManager").GetComponent<GameManager>()
         if (gameManager.playerLocation == GameDataTypes.locationType.Space) gameManager.spaceSpawn = gameObject.name;
         // Debug.Log("entered landing area -> " + gameObject.name);
@@ -58,10 +59,11 @@ public class LandingArea : MonoBehaviour
     }
     void OnTriggerStay(Collider other)
     {
+		//spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
         //displayUI = true;
         //GameObject.FindWithTag("GameManager").GetComponent<GameManager>()
-        gameManager.spawnName = spawnName;
-        gameManager.sceneName = sceneName;
+        spawnManager.spawnName = spawnName;
+        spawnManager.sceneName = sceneName;
         //Debug.Log("staying in landing area -> " + gameObject.name);
         gameManager.canLand = true;
         //GameObject.FindWithTag("GameManager").GetComponent<GameManager>().isLanding = true;
@@ -73,10 +75,10 @@ public class LandingArea : MonoBehaviour
         displayUI = false;
         //Debug.Log("exiting landing area " + gameObject.name);
         //GameObject.FindWithTag("GameManager").GetComponent<GameManager>()
-        gameManager.spawnName = "none";
-        if (gameManager.playerLocation == GameDataTypes.locationType.Air) gameManager.spawnName = gameManager.spaceSpawn;
+        spawnManager.spawnName = "none";
+        if (gameManager.playerLocation == GameDataTypes.locationType.Air) spawnManager.spawnName = gameManager.spaceSpawn;
         //GameObject.FindWithTag("GameManager").GetComponent<GameManager>()
-        gameManager.sceneName = "none";
+        spawnManager.sceneName = "none";
         //GameObject.FindWithTag("GameManager").GetComponent<GameManager>()
         gameManager.canLand = false;
         //gameManager.isLanding = false;
@@ -84,7 +86,8 @@ public class LandingArea : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        gameManager = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+		spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
         //gameManager.spawnName;
         //spawnName = this.gameObject.name;
         //airSpawn = this.gameObject.name + "Air";

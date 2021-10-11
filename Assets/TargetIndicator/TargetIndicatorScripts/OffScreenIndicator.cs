@@ -72,7 +72,7 @@ void Update(){
         foreach(Target target in targets)
         {
             if (target.indicator != null){
-				Debug.Log(target.gameObject);
+				//Debug.Log(target.gameObject);
                 bool GOenabled = getObjective(target.gameObject);
                 //Debug.Log(enabled);
                 if (GOenabled) {

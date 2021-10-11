@@ -48,6 +48,7 @@ public class ShipControls : MonoBehaviour
 
     float bank = 0F;
     GameManager gameManager;
+	SpawnManager spawnManager;
     LandingArea landing;
 
     void OnTriggerEnter(Collider other)
@@ -89,6 +90,7 @@ public class ShipControls : MonoBehaviour
     {
         GetComponent<Rigidbody>().mass = mass;
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+		spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
         //GameObject.Find("UIManager").GetComponent<SelectionUI>().FindSelectionObjects();
         //forwardThrust=forward_thrust;
         //backwardThrust=backward_thrust;
@@ -158,13 +160,13 @@ public class ShipControls : MonoBehaviour
         float theThrust = thrust;
 
         if (Input.GetKeyDown(KeyCode.K) && gameManager.playerLocation == locationType.Air) {
-            
+
             gameManager.newLandingCode();
         }
-        
-        if (Input.GetKeyDown(KeyCode.L) && gameManager.canLand && gameManager.spawnName != "none")
+
+        if (Input.GetKeyDown(KeyCode.L) && gameManager.canLand && spawnManager.spawnName != "none")
         {
-            
+
             // print(gameManager.spawnName);
             //if (gameManager.spawnName == "none" || gameManager.spawnName == "") gameManager.spawnName = "StartingPoint";
             switch (gameManager.playerLocation)
@@ -182,7 +184,7 @@ public class ShipControls : MonoBehaviour
                         gameManager.sceneName = "Ground";
                     }
 
-                    SceneManager.LoadScene(gameManager.sceneName);
+                    SceneManager.LoadScene(spawnManager.sceneName);
 
                     break;
             }
@@ -190,13 +192,14 @@ public class ShipControls : MonoBehaviour
              gameManager.GetComponent<GameManager>()._SpawnPlayer();//"same map");
             gameManager.updateTargets = true;
         }
-        if (Input.GetKeyDown(KeyCode.T) && landingControl && gameManager.playerLocation != locationType.Space)
+		//&& landingControl
+        if (Input.GetKeyDown(KeyCode.T)  && gameManager.playerLocation != locationType.Space)
         {
             //print(gameManager.spawnName);
             gameManager.playerLocation = locationType.Space;
 
             //gameManager.spaceSpawn = "StartingPoint";
-            gameManager.spawnName = gameManager.spaceSpawn;
+            spawnManager.spawnName = gameManager.spaceSpawn;
             print(gameManager.sceneName);
             // if (gameManager.sceneName == "none" || gameManager.sceneName == "")
             // {
