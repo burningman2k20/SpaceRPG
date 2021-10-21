@@ -46,6 +46,8 @@ public class ShipControls : MonoBehaviour
 
     public Engines engine;//=new engine_class();
     public Weapons weapon;
+
+    public ShipGenerator generator;
     //public weapon_class weapon;//=new weapon_class();
 
     float bank = 0F;

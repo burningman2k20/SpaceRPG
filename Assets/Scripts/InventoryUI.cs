@@ -11,7 +11,20 @@ public class InventoryUI : MonoBehaviour
 	public CharacterManager characterManager;
 	public PrefabManager prefabManager;
 
-	void Awake(){
+    int DropButtonWidth = 45;
+    int DropAllButtonWidth = 70;
+    int EquipButtonWidth = 60;
+
+    int MaxItemWidth = 120;
+    int MaxTypeWidth = 120;
+
+	int MaxScrollHeight = 200;
+    int MaxScrollWidth = 475;
+
+    Vector2 scrollPosition;
+
+
+    void Awake(){
 
 		gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
 		prefabManager = GameObject.Find("PrefabManager").GetComponent<PrefabManager>();
@@ -37,20 +50,24 @@ public class InventoryUI : MonoBehaviour
 
 		}
 		GUILayout.EndHorizontal();
+		scrollPosition = GUILayout.BeginScrollView(
+            scrollPosition, GUILayout.Width(MaxScrollWidth), GUILayout.Height(MaxScrollHeight));
 		foreach(QI_ItemData entry in inventoryManager.itemDatabase.Items)
 		{
+			
             // do something with entry.Value or entry.Key
             if (inventoryManager.inventory.GetStock(entry.Name) > 0)
             {
                 GUILayout.BeginHorizontal();
-                GUILayout.Box(string.Format("{0}", inventoryManager.inventory.GetStock(entry.Name)), GUILayout.MinWidth(50));
-				GUILayout.Box(entry.Name);
+                GUILayout.Box(string.Format("{0}", inventoryManager.inventory.GetStock(entry.Name)), GUILayout.Width(35));
+				GUILayout.Box(entry.Name, GUILayout.Width(MaxItemWidth));
                 QI_ItemData item = inventoryManager.itemDatabase.GetItem(entry.Name);
                 if (item.ItemPrefab != null)
                 {
                     Projectile projectile = item.ItemPrefab.gameObject.GetComponent<Projectile>();
                     Weapons weapon = item.ItemPrefab.gameObject.GetComponent<Weapons>();
                     Engines engine = item.ItemPrefab.gameObject.GetComponent<Engines>();
+                    ShipGenerator generator = item.ItemPrefab.gameObject.GetComponent<ShipGenerator>();
                     //ShipControls shipControls = prefabManager.currentPrefab.GetComponent<ShipControls>();
                     //SimpleTankController tankController = prefabManager.currentPrefab.GetComponent<SimpleTankController>();
 
@@ -58,23 +75,34 @@ public class InventoryUI : MonoBehaviour
                     {
                         GUILayout.Box("Ammo");
                     }
+					 if (generator != null)
+                    {
+                        GUILayout.Box("Ship Generator", GUILayout.Width(MaxTypeWidth));
+                        if (characterManager.characterData.shipGenerator != generator)
+                        {
+                            if (GUILayout.Button("Equip", GUILayout.Width(EquipButtonWidth))){
+								characterManager.characterData.shipGenerator = item.ItemPrefab.gameObject.GetComponent<ShipGenerator>();
+								inventoryManager.Drop(entry.Name);
+							}
+                        }
+                    }
 
 					if (weapon != null){
                         if (weapon.weaponPlacement == WeaponPlacement.Ship)
                         {
-                            GUILayout.Box("Ship Weapon");
+                            GUILayout.Box("Ship Weapon", GUILayout.Width(MaxTypeWidth));
 							if (characterManager.characterData.shipWeapon != weapon) 
-								if (GUILayout.Button("Equip")){
+								if (GUILayout.Button("Equip", GUILayout.Width(EquipButtonWidth))){
 									characterManager.characterData.shipWeapon = item.ItemPrefab.gameObject.GetComponent<Weapons>();
 									inventoryManager.Drop(entry.Name);
 								}
                         }
                         if (weapon.weaponPlacement == WeaponPlacement.Person)
                         {
-                            GUILayout.Box("Personal Weapon");
+                            GUILayout.Box("Personal Weapon", GUILayout.Width(MaxTypeWidth));
                             if (characterManager.characterData.groundWeapon != weapon)
                             {
-                                if (GUILayout.Button("Equip")){
+                                if (GUILayout.Button("Equip", GUILayout.Width(EquipButtonWidth))){
 									characterManager.characterData.groundWeapon = item.ItemPrefab.gameObject.GetComponent<Weapons>();
 									inventoryManager.Drop(entry.Name);
 								}
@@ -84,89 +112,40 @@ public class InventoryUI : MonoBehaviour
                     }
 
 					if (engine != null){
-						GUILayout.Box("Engine");
+						GUILayout.Box("Engine", GUILayout.Width(MaxTypeWidth));
                         if (characterManager.characterData.shipEngine != engine)
                         {
-                            if (GUILayout.Button("Equip")){
+                            if (GUILayout.Button("Equip", GUILayout.Width(EquipButtonWidth))){
 								characterManager.characterData.shipEngine = item.ItemPrefab.gameObject.GetComponent<Engines>();
 								inventoryManager.Drop(entry.Name);
 							}
                         }
                     }
 
-                    // if (weapon != null)
-                    // {
-					// 		GUILayout.Box("Weapon");
-                    //     switch (weapon.weaponPlacement)
-                    //     {
-                    //         case WeaponPlacement.Ship:
-					
-                    //     if (characterManager.characterData.shipWeapon != item.ItemPrefab.gameObject.GetComponent<Weapons>() && GUILayout.Button("Equip"))
-                    //     {
-                    //         characterManager.characterData.shipWeapon = item.ItemPrefab.gameObject.GetComponent<Weapons>();
-                    //         //prefabManager.currentPrefab.GetComponent<ShipControls>().setWeapon(item);
-                    //         inventoryManager.Drop(entry.Name);
-                    //     }
-                    //     else if (characterManager.characterData.shipWeapon == item.ItemPrefab.gameObject.GetComponent<Weapons>())
-                    //     {
-                    //         GUILayout.Box("Equip");
-                    //         //prefabManager.currentPrefab.GetComponent<ShipControls>().setEngine(null);
-                    //     }
-                    //             break;
-
-                    //         case WeaponPlacement.Person:
-						
-                    //     		if (characterManager.characterData.groundWeapon != item.ItemPrefab.gameObject.GetComponent<Weapons>()) if (GUILayout.Button("Equip"))
-                    //     		{
-                    //         //prefabManager.currentPrefab.GetComponent<SimpleTankController>().setWeapon(item);
-                    //         		characterManager.characterData.groundWeapon = item.ItemPrefab.gameObject.GetComponent<Weapons>();
-                    //         		inventoryManager.Drop(entry.Name);
-                    //     		} 
-					// 			else if (characterManager.characterData.groundWeapon == item.ItemPrefab.gameObject.GetComponent<Weapons>())
-                    //     		{
-                    //         		GUILayout.Box("Equip");
-                    //         //prefabManager.currentPrefab.GetComponent<ShipControls>().setEngine(null);
-                    //     		}
-                    //             break;
-                    //     }
-                    // }
-                
-                    //item.ItemPrefab.gameObject.GetComponent<Engines>()
-                    // if (characterManager.characterData.shipEngine != item.ItemPrefab.gameObject.GetComponent<Engines>() && GUILayout.Button("Equip"))
-                    // {
-					// 	 GUILayout.Box("Engine");
-                    //     //prefabManager.currentPrefab.GetComponent<ShipControls>().setEngine(item);
-                    //     characterManager.characterData.shipEngine = item.ItemPrefab.gameObject.GetComponent<Engines>();
-                    //     inventoryManager.Drop(entry.Name);
-                    // }
-                    // else if (characterManager.characterData.shipEngine == item.ItemPrefab.gameObject.GetComponent<Engines>())
-                    // {
-					// 	GUILayout.Box("Engine");
-                    //     GUILayout.Box("Equip");
-                    //     //prefabManager.currentPrefab.GetComponent<ShipControls>().setEngine(null);
-                    // }
-                    //}
-                    GUILayout.Box(item.ItemPrefab.gameObject.name);
+                   
+                    //GUILayout.Box(item.ItemPrefab.gameObject.name, GUILayout.Width(MaxItemWidth));
                 }
 
 				 if (inventoryManager.inventory.GetStock(entry.Name) >= 1) {
-					if (GUILayout.Button("Drop")){
+					if (GUILayout.Button("Drop", GUILayout.Width(DropButtonWidth))){
 						 inventoryManager.Drop(entry.Name, 1);
 					}
 				}
 				if (inventoryManager.inventory.GetStock(entry.Name) > 1){
-					if (GUILayout.Button("Drop All")){
+					if (GUILayout.Button("Drop All", GUILayout.Width(DropAllButtonWidth))){
 						inventoryManager.Drop(entry.Name,inventoryManager.inventory.GetStock(entry.Name));
 					}
 
 				} else {
-					GUILayout.Box("Drop All");
+					GUILayout.Box("Drop All", GUILayout.Width(DropAllButtonWidth));
 				}
 				GUILayout.EndHorizontal();
             }
            
-				
+			 // End the scrollview we began above.
+        	
 			}
+			GUILayout.EndScrollView();	
 			
 			//GUILayout.Box(entry.Key);
 			

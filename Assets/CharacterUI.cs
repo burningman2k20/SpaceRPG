@@ -15,6 +15,8 @@ public class CharacterUI : MonoBehaviour
 	public SimpleTankController groundControls;
 	public Rect Placement;
 
+	 int UnequipButtonWidth = 75;
+
 	void OnGUI(){
 		if (!gameManager.gameStarted) return;
 
@@ -27,7 +29,7 @@ public class CharacterUI : MonoBehaviour
 		if (characterManager.characterData.shipEngine != null){
 			GUILayout.BeginHorizontal();
 			GUILayout.Box(string.Format("{0}",characterManager.characterData.shipEngine));
-			if (GUILayout.Button("Unequip")){
+			if (GUILayout.Button("Unequip", GUILayout.Width(UnequipButtonWidth))){
                 string engine_name = characterManager.characterData.shipEngine.gameObject.name;
                 //prefabManager.currentPrefab.GetComponent<ShipControls>().engine.gameObject.name;
                 inventoryManager.inventory.AddItem(inventoryManager.itemDatabase.GetItem(engine_name),1);
@@ -40,10 +42,26 @@ public class CharacterUI : MonoBehaviour
 			GUILayout.Box("No engine mounted");
 		}
 
+		if (characterManager.characterData.shipGenerator != null){
+			GUILayout.BeginHorizontal();
+			GUILayout.Box(string.Format("{0}",characterManager.characterData.shipGenerator));
+			if (GUILayout.Button("Unequip", GUILayout.Width(UnequipButtonWidth))){
+                string generator_name = characterManager.characterData.shipGenerator.gameObject.name;
+                //prefabManager.currentPrefab.GetComponent<ShipControls>().engine.gameObject.name;
+                inventoryManager.inventory.AddItem(inventoryManager.itemDatabase.GetItem(generator_name),1);
+                //Debug.Log(prefabManager.currentPrefab.GetComponent<ShipControls>().engine.gameObject.name);
+                characterManager.characterData.shipGenerator = null;
+                //prefabManager.currentPrefab.GetComponent<ShipControls>().setEngine(null);
+            }
+			GUILayout.EndHorizontal();
+		} else {
+			GUILayout.Box("No Generator mounted");
+		}
+
 		if (characterManager.characterData.shipWeapon != null){
 			GUILayout.BeginHorizontal();
 			GUILayout.Box(string.Format("{0}",characterManager.characterData.shipWeapon));
-			if (GUILayout.Button("Unequip")){
+			if (GUILayout.Button("Unequip", GUILayout.Width(UnequipButtonWidth))){
 
                 string weapon_name = characterManager.characterData.shipWeapon.gameObject.name;
                 //prefabManager.currentPrefab.GetComponent<ShipControls>().weapon.gameObject.name;
@@ -63,7 +81,7 @@ public class CharacterUI : MonoBehaviour
 			if (characterManager.characterData.groundWeapon != null){
 				GUILayout.BeginHorizontal();
 				GUILayout.Box(string.Format("{0}",characterManager.characterData.groundWeapon));
-			if (GUILayout.Button("Unequip")){
+			if (GUILayout.Button("Unequip", GUILayout.Width(UnequipButtonWidth))){
                 string weapon_name = characterManager.characterData.groundWeapon.gameObject.name;
                 //prefabManager.currentPrefab.GetComponent<SimpleTankController>().weapon.gameObject.name;
                 inventoryManager.inventory.AddItem(inventoryManager.itemDatabase.GetItem(weapon_name),1);

@@ -13,6 +13,8 @@ public class NewCharacterData {
     public string shipWeaponName;
     public string groundWeaponName;
     public Engines shipEngine;
+    public string shipGeneratorName;
+    public ShipGenerator shipGenerator;
     public Weapons shipWeapon;
     public Weapons groundWeapon;
 }
@@ -34,7 +36,7 @@ public class CharacterManager : MonoBehaviour
 	}
 
     void OnGUI(){
-
+        if (!gameManager.gameStarted) return;
         GUILayout.BeginArea(new Rect(0,250,100,100));
         if (GUILayout.Button("Save")){
             WriteFile();
@@ -67,12 +69,15 @@ public class CharacterManager : MonoBehaviour
         Engines engine = characterData.shipEngine;
         //prefabManager.currentPrefab.GetComponent<ShipControls>().engine;
         Weapons shipWeapon = characterData.shipWeapon;
+        ShipGenerator shipGenerator = characterData.shipGenerator;
         //prefabManager.currentPrefab.GetComponent<ShipControls>().weapon;
         Weapons groundWeapon = characterData.groundWeapon;
         //null;
         if (gameManager.playerLocation == locationType.Ground) groundWeapon = prefabManager.currentPrefab.GetComponent<SimpleTankController>().weapon;
         if (engine != null) characterData.shipEngineName = engine.name;
         if (shipWeapon != null) characterData.shipWeaponName = shipWeapon.name;
+        if (shipGenerator != null) characterData.shipGeneratorName = shipGenerator.name;
+
         if (gameManager.playerLocation == locationType.Ground) characterData.groundWeaponName = groundWeapon.name;
         
         writer.WriteLine(CreateJSON(characterData));
@@ -107,6 +112,7 @@ public class CharacterManager : MonoBehaviour
         characterData.shipWeapon = item.ItemPrefab.gameObject.GetComponent<Weapons>();
         //if (characterData.shipEngineName != "") 
         characterData.shipEngine = inventoryManager.itemDatabase.GetItem(characterData.shipEngineName).ItemPrefab.gameObject.GetComponent<Engines>();
+        characterData.shipGenerator = inventoryManager.itemDatabase.GetItem(characterData.shipGeneratorName).ItemPrefab.gameObject.GetComponent<ShipGenerator>();
         //if (characterData.groundWeaponName != "") 
         characterData.groundWeapon = inventoryManager.itemDatabase.GetItem(characterData.groundWeaponName).ItemPrefab.gameObject.GetComponent<Weapons>();
         //Debug.Log("Read -> " + line);
@@ -144,6 +150,7 @@ public class CharacterManager : MonoBehaviour
         if (prefabManager.currentPrefab.GetComponent<ShipControls>() != null){
             characterData.shipControls = prefabManager.currentPrefab.GetComponent<ShipControls>();
             characterData.shipControls.engine = characterData.shipEngine;
+            characterData.shipControls.generator = characterData.shipGenerator;
             characterData.shipControls.weapon = characterData.shipWeapon;
         }
         //characterData.tankController = prefabManager.currentPrefab.GetComponent<SimpleTankController>();
