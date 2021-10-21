@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 860560389424347787}
   - component: {fileID: 8472061736858994375}
   m_Layer: 0
-  m_Name: Item
+  m_Name: ItemEngine1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -57,6 +57,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -81,6 +82,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!65 &860560389424347787
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -107,6 +109,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: 1
+  itemData: {fileID: 11400000, guid: 510c8b910c80d1e41a069fb7b251ffc3, type: 2}
   interact: 0
-  inventory: {fileID: 0}
-  itemDatabase: {fileID: 11400000, guid: 59dc492437a0c4e0a8ba5acbefee8c14, type: 2}

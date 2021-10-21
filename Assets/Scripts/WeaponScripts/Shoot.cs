@@ -5,6 +5,7 @@ using UnityEngine;
 public class Shoot : MonoBehaviour
 {
     // Start is called before the first frame update
+    PrefabManager prefabManager;
     public Weapons weapon;
     //public GameObject projectile;
     public Transform projectileOrigin;
@@ -23,11 +24,7 @@ public class Shoot : MonoBehaviour
     public bool IsFacing;
     bool facingFront = false;
     bool facingRear = false;
-    void Start()
-    {
-
-    }
-
+    
     /// <summary>
     /// OnGUI is called for rendering and handling GUI events.
     /// This function can be called multiple times per frame (one call per event).
@@ -44,11 +41,19 @@ public class Shoot : MonoBehaviour
         GUILayout.EndArea();
         //  }
     }
+
+    void Start () {
+        prefabManager = GameObject.Find("PrefabManager").GetComponent<PrefabManager>();
+    }
     // Update is called once per frame
     void Update()
     {
 
-        projectileData = weapon.projectile.GetComponent<Projectile>();
+        ShipControls shipControls = prefabManager.currentPrefab.GetComponent<ShipControls>();
+        SimpleTankController tankController = prefabManager.currentPrefab.GetComponent<SimpleTankController>();
+
+        if (shipControls != null) projectileData = shipControls.weapon.projectile.GetComponent<Projectile>();
+        if (tankController != null) projectileData = tankController.weapon.projectile.GetComponent<Projectile>();
         /*if (Input.GetKeyDown (KeyCode.Q)) {
             shoot = !shoot;
             GameObject.Find ("UIManager").GetComponent<SelectionUI> ().target = null;

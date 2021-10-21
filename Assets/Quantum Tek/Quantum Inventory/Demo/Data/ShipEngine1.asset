@@ -12,11 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea18bc8bfb5d7455b95c75307b68ce47, type: 3}
   m_Name: ShipEngine1
   m_EditorClassIdentifier: 
-  Name: Engine1
+  Name: ShipEngine1
   Description: Engine1
   Weight: 5
   Price: 1
   Icon: {fileID: 0}
-  ItemPrefab: {fileID: 8874444131430883486, guid: 770aa8536ef4cfd48bc533634097e008,
-    type: 3}
+  ItemPrefab: {fileID: 8874444131430883486, guid: 770aa8536ef4cfd48bc533634097e008, type: 3}
   MaxStack: 1

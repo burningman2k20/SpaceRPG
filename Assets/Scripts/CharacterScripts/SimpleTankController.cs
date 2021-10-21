@@ -1,11 +1,13 @@
 ﻿using UnityEngine;
 using static GameDataTypes;
+using QuantumTek.QuantumInventory;
 
 [RequireComponent (typeof (CharacterController))]
 public class SimpleTankController : MonoBehaviour {
     public GameManager gameManager;
 	public SpawnManager spawnManager;
 	public PrefabManager prefabManager;
+    public CharacterManager characterManager;
 
     // Tank Controller
     public enum MoveDirection { Forward, Reverse, Stop }
@@ -50,18 +52,41 @@ public class SimpleTankController : MonoBehaviour {
     float stickyDelayCount = 9999f;
     CharacterController m_Controller;
     Transform m_Transform;
+    public Weapons weapon;
 
     Transform obj1; // = GameObject.Find(gameManager.prefabLocation.name).transform;
 
     Transform obj2; //= transform;
+    
+    
+     public void setWeapon(QI_ItemData new_weapon){
+		if (new_weapon == null){
+            characterManager.characterData.groundWeapon = null;
+            weapon = null;
+			//forwardThrust = 0;
+	        //backwardThrust = 0;
+			return;
+		}
+		string weapon_name = new_weapon.ItemPrefab.gameObject.name;
+		Weapons changeWeapon =  new_weapon.ItemPrefab.gameObject.GetComponent<Weapons>();
+        characterManager.characterData.groundWeaponName = weapon_name;
+		//Resources.Load<Engines>("Prefabs/ShipComponents/Engines/" + engine_name) ;
+		//Debug.Log(engine_name);
+		//Engines changeEngine = new_engine.ItemPrefab.gameObject.GetComponent<Engines>();
+        weapon = changeWeapon;
+        //forwardThrust = engine.forwardThrust;
+        //backwardThrust = engine.backwardThrust;
+    }
     private void Awake () {
         // Performance optimization - cache transform reference.
         m_Transform = GetComponent<Transform> ();
 
         m_Controller = GetComponent<CharacterController> ();
-		//spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
-		//prefabManager = GameObject.Find("PrefabManager").GetComponent<PrefabManager>();
+        //spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
+        //prefabManager = GameObject.Find("PrefabManager").GetComponent<PrefabManager>();
+        characterManager = GameObject.Find("CharacterManager").GetComponent<CharacterManager>();
         currentTopSpeed = topForwardSpeed;
+        //weapon = characterManager.characterData.groundWeapon;
     }
 
     void OnTriggerEnter (Collider other) {
@@ -220,6 +245,7 @@ public class SimpleTankController : MonoBehaviour {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager> ();
 		spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager> ();
 		prefabManager = GameObject.Find("PrefabManager").GetComponent<PrefabManager> ();
+        characterManager = GameObject.Find("CharacterManager").GetComponent<CharacterManager> ();
         //GameObject.Find("UIManager").GetComponent<SelectionUI>().FindSelectionObjects();
     }
 }

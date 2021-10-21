@@ -26,6 +26,6 @@ public class PrefabManager : MonoBehaviour
 
 	void Awake()
     {
-        DontDestroyOnLoad(this.gameObject);
+        //DontDestroyOnLoad(this.gameObject);
     }
 }

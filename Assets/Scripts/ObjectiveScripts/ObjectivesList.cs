@@ -42,7 +42,7 @@ public class ObjectivesList : MonoBehaviour
 {
 
 	if (jsonFile == "") jsonFile = jsonFileName;
-	Debug.Log("Saving -> " + jsonFile);
+	//Debug.Log("Saving -> " + jsonFile);
 	//if (objList == null) objList = masterObjectiveList;
 	string path = Application.persistentDataPath + "/" + jsonFile;
 	//Write some text to the test.txt file
@@ -78,7 +78,7 @@ public class ObjectivesList : MonoBehaviour
 
 	foreach (MainObjectiveList obj in objList) {
 		//WriteFile(obj);
-		Debug.Log("Write -> " + CreateJSON(obj));
+		//Debug.Log("Write -> " + CreateJSON(obj));
 		writer.WriteLine(CreateJSON(obj));
 	}
 
@@ -94,7 +94,7 @@ public class ObjectivesList : MonoBehaviour
  public List<MainObjectiveList> ReadFile(string jsonFile ="") {
 	 List<MainObjectiveList> objList = new List<MainObjectiveList>();
 	 if (jsonFile == "") jsonFile = jsonFileName;
-	 Debug.Log("Loading -> " + jsonFile);
+	// Debug.Log("Loading -> " + jsonFile);
 	string path = Application.persistentDataPath + "/" + jsonFile;
 	//Read the text from directly from the test.txt file
 	StreamReader reader = new StreamReader(path);
@@ -102,7 +102,7 @@ public class ObjectivesList : MonoBehaviour
 	bool done = false;
 	//reader
 	while ((line = reader.ReadLine()) != null){
-		Debug.Log("Read -> " + line);
+		//Debug.Log("Read -> " + line);
 		objList.Add(CreateFromJSON(line));
 	}
 	//.ReadToEnd());
@@ -115,9 +115,9 @@ public void toggleCompleteObjective(string name, bool toggle){
 	//MainObjectiveList obj in objList) {
 		//WriteFile(obj);
 		//Debug.Log(CreateJSON(obj));
-		Debug.Log(playerObjectiveList[index]._objectiveObjectName);
+		//Debug.Log(playerObjectiveList[index]._objectiveObjectName);
 		if (playerObjectiveList[index]._objectiveObjectName == name) {
-			Debug.Log(playerObjectiveList[index]._objectiveObjectName);
+			//Debug.Log(playerObjectiveList[index]._objectiveObjectName);
 			playerObjectiveList[index].completed = toggle;
 		}
 		 //playerObjectiveList[index] = masterObjectiveList[index];
@@ -165,6 +165,6 @@ public void updatePlayerObjective(MainObjectiveList update){
 
 	void Awake()
     {
-        DontDestroyOnLoad(this.gameObject);
+        //DontDestroyOnLoad(this.gameObject);
     }
 }

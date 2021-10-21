@@ -4,6 +4,7 @@ using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
 using static GameDataTypes;
+using QuantumTek.QuantumInventory;
 
 // Put this on a rigidbody object and instantly
 // have 2D spaceship controls like OverWhelmed Arena
@@ -43,12 +44,14 @@ public class ShipControls : MonoBehaviour
 
     [SerializeField] public bool landingControl = false;
 
-    // public engine_class engine;//=new engine_class();
-    // public weapon_class weapon;//=new weapon_class();
+    public Engines engine;//=new engine_class();
+    public Weapons weapon;
+    //public weapon_class weapon;//=new weapon_class();
 
     float bank = 0F;
     GameManager gameManager;
 	SpawnManager spawnManager;
+    CharacterManager characterManager;
     LandingArea landing;
 
     void OnTriggerEnter(Collider other)
@@ -72,12 +75,49 @@ public class ShipControls : MonoBehaviour
     // public weapon_class returnWeapon(){
     //   return weapon;
     // }
-    // void setEngine(engine_class new_engine){
-    //     engine_class changeEngine=Resources.Load<engine_class>("Prefabs/World/Engines/engine1") ;
-    //     engine = new_engine;
-    //     forwardThrust=engine.forward_thrust;
-    //     backwardThrust=engine.backward_thrust;
-    // }
+    public void setEngine(QI_ItemData new_engine){
+        characterManager = GameObject.Find("CharacterManager").GetComponent<CharacterManager> ();
+		if (new_engine == null){
+            characterManager.characterData.shipEngine = null;
+            engine = null;
+			forwardThrust = 0;
+	        backwardThrust = 0;
+			return;
+		}
+		string engine_name = new_engine.ItemPrefab.gameObject.name;
+        //characterManager.characterData.shipEngineName = engine_name;
+		Engines changeEngine =  new_engine.ItemPrefab.gameObject.GetComponent<Engines>();
+        //characterManager.characterData.shipEngine = changeEngine;
+		//Resources.Load<Engines>("Prefabs/ShipComponents/Engines/" + engine_name) ;
+		//Debug.Log(engine_name);
+		//Engines changeEngine = new_engine.ItemPrefab.gameObject.GetComponent<Engines>();
+        engine = changeEngine;
+        characterManager.characterData.shipEngine = engine;
+        forwardThrust = engine.forwardThrust;
+        backwardThrust = engine.backwardThrust;
+    }
+
+    public void setWeapon(QI_ItemData new_weapon){
+        characterManager = GameObject.Find("CharacterManager").GetComponent<CharacterManager> ();
+		if (new_weapon == null){
+			weapon = null;
+            characterManager.characterData.shipWeapon = null;
+            //forwardThrust = 0;
+            //backwardThrust = 0;
+            return;
+		}
+		string weapon_name = new_weapon.ItemPrefab.gameObject.name;
+		Weapons changeWeapon =  new_weapon.ItemPrefab.gameObject.GetComponent<Weapons>();
+		//characterManager.characterData.shipWeaponName = weapon_name;
+        //characterManager.characterData.shipWeapon = changeWeapon;
+        //Resources.Load<Engines>("Prefabs/ShipComponents/Engines/" + engine_name) ;
+		//Debug.Log(engine_name);
+		//Engines changeEngine = new_engine.ItemPrefab.gameObject.GetComponent<Engines>();
+        weapon = changeWeapon;
+        characterManager.characterData.shipWeapon = weapon;
+        //forwardThrust = engine.forwardThrust;
+        //backwardThrust = engine.backwardThrust;
+    }
     //
     // void setEngine(string new_engine){
     //     engine_class changeEngine=Resources.Load<engine_class>("Prefabs/World/Engines/" + new_engine) ;
@@ -91,6 +131,7 @@ public class ShipControls : MonoBehaviour
         GetComponent<Rigidbody>().mass = mass;
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
 		spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
+        characterManager = GameObject.Find("CharacterManager").GetComponent<CharacterManager> ();
         //GameObject.Find("UIManager").GetComponent<SelectionUI>().FindSelectionObjects();
         //forwardThrust=forward_thrust;
         //backwardThrust=backward_thrust;
@@ -98,6 +139,12 @@ public class ShipControls : MonoBehaviour
         //engine=Resources.Load<engine_class>("Prefabs/World/Engines/engine1") ;
 
         //transform.rotation=Quaternion.;
+    }
+
+    void Awake(){
+        characterManager = GameObject.Find("CharacterManager").GetComponent<CharacterManager> ();
+        //weapon = characterManager.characterData.groundWeapon;
+        //engine = characterManager.characterData.shipEngine;
     }
 
     void FixedUpdate()
@@ -220,6 +267,7 @@ public class ShipControls : MonoBehaviour
         {
             thrust = Input.GetAxis("Vertical");
             turn = Input.GetAxis("Horizontal") * turnSpeed;
+			//Debug.Log(string.Format("thrust {0} --- turn {1}", thrust, turn));
         }
 
         if (thrust > 0F)

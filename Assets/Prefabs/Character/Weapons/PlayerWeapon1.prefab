@@ -43,5 +43,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cf6c86c551fb994eabe8bfe0cc6cb31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectile: {fileID: -2339645754345938337, guid: 00a6b0414c21f604bbdf5ccd87753b30,
-    type: 3}
+  projectile: {fileID: -2339645754345938337, guid: 00a6b0414c21f604bbdf5ccd87753b30, type: 3}
+  weaponPlacement: 1

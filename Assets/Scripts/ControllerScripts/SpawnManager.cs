@@ -74,6 +74,6 @@ void refreshSpawnPoints(){
 
 	void Awake()
     {
-        DontDestroyOnLoad(this.gameObject);
+        //DontDestroyOnLoad(this.gameObject);
     }
 }

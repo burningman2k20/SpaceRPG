@@ -50,7 +50,7 @@ public class Objectives : MonoBehaviour
     {
         if (this.CurrentObjective != null)
         {
-            this.CurrentObjectiveDescription.text = this.CurrentObjective.Description;
+            //this.CurrentObjectiveDescription.text = this.CurrentObjective.Description;
             //GameObject.Find("ArrowImage").GetComponent<PointAtObjective>().showArrow = true;
             //GameObject.Find("ArrowImage").GetComponent<PointAtObjective>().targetPosition = this.CurrentObjective.gameObject.transform.position;
         }
@@ -58,11 +58,11 @@ public class Objectives : MonoBehaviour
         {
             //GameObject.Find("ArrowImage").GetComponent<PointAtObjective>().showArrow = false;
             //GameObject.Find("ArrowImage").GetComponent<PointAtObjective>().targetPosition = ;
-            this.CurrentObjectiveDescription.text = "";
+        //    this.CurrentObjectiveDescription.text = "";
         }
 
-        GUILayout.BeginArea(new Rect(0,0,250,250));
-        GUILayout.Label( this.CurrentObjectiveDescription.text);
-        GUILayout.EndArea();
+        // GUILayout.BeginArea(new Rect(0,0,250,250));
+        // GUILayout.Label( this.CurrentObjectiveDescription.text);
+        // GUILayout.EndArea();
     }
 }

@@ -144,15 +144,15 @@ public class SelectionUI : MonoBehaviour
             //Debug.Log(_distance);
         }
 
-        newUIText = GameObject.Find("object").GetComponent<Text>();
+        //newUIText = GameObject.Find("object").GetComponent<Text>();
 
         if (target != null) {
 
-            newUIText.text = target.name;
+            //newUIText.text = target.name;
 
-            selectedObject = target.GetComponent<_Selection>();
+            //selectedObject = target.GetComponent<_Selection>();
         } else {
-            newUIText.text = "None";
+            //newUIText.text = "None";
         }
     }
 }

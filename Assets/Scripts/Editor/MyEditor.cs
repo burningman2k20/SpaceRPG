@@ -10,7 +10,7 @@ public class MyEditor : EditorWindow {
 	static public string jsonFileName = "objectives.json";
 	public List<MainObjectiveList> masterObjectiveList = new List<MainObjectiveList> ();
 
-	[MenuItem ("Editor/Edit Window")]
+	[MenuItem ("Editor/Edit Data")]
 
 	static void Init () {
 		MyEditor window = (MyEditor) EditorWindow.GetWindow (typeof (MyEditor));
@@ -104,11 +104,12 @@ public class MyEditor : EditorWindow {
 		GUILayout.EndHorizontal ();
 
 		// GUILayout.BeginHorizontal ();
-		// foreach(MainObjectiveList obj in masterObjectiveList){
+		 foreach(MainObjectiveList obj in masterObjectiveList){
 		// 	GUILayout.BeginVertical ();
-		// 	GUILayout.Box(obj._objectiveObjectName);
+		 	GUILayout.Box(obj._objectiveObjectName);
 		// 	GUILayout.EndVertical ();
-		// }GUILayout.EndHorizontal ();
+		 }
+		//GUILayout.EndHorizontal ();
 	}
 	// Start is called before the first frame update
 	void Start () {

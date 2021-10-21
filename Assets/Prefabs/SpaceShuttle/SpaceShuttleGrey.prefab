@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 849630729680134605}
   - component: {fileID: 5668312440738823143}
   m_Layer: 0
-  m_Name: SpaceShuttle_01
+  m_Name: SpaceShuttleGrey
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -66,6 +66,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -90,6 +91,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!114 &49975225010201049
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -165,6 +167,8 @@ MonoBehaviour:
   slowADrag: 0.1
   playerControl: 1
   landingControl: 0
+  engine: {fileID: 8874444131430883487, guid: 770aa8536ef4cfd48bc533634097e008, type: 3}
+  weapon: {fileID: 7352977061864315948, guid: f7725a57571bf7744ba4bea87d8c0f1b, type: 3}
 --- !u!114 &849630729680134605
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -183,8 +187,7 @@ MonoBehaviour:
   rearMount: {fileID: 3139101659077960857}
   leftMount: {fileID: 0}
   rightMount: {fileID: 0}
-  projectileData: {fileID: 8980481597853449410, guid: fd463c094919bfe469484bbe3b41598a,
-    type: 3}
+  projectileData: {fileID: 8980481597853449410, guid: fd463c094919bfe469484bbe3b41598a, type: 3}
   shoot: 1
   direction: {x: 0, y: 1, z: 0}
   angleFront: 0
@@ -267,6 +270,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -291,6 +295,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!135 &6641607392740426083
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -391,6 +396,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -415,6 +421,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!135 &1502942008284224117
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -497,6 +504,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -521,6 +529,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!135 &2981278712188150216
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -547,7 +556,7 @@ GameObject:
   - component: {fileID: 7788639304427884465}
   - component: {fileID: 1979561869840880961}
   m_Layer: 0
-  m_Name: front
+  m_Name: frontWeaponMount
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -590,6 +599,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -614,6 +624,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!135 &1979561869840880961
 SphereCollider:
   m_ObjectHideFlags: 0

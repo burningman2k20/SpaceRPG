@@ -16,3 +16,6 @@ MonoBehaviour:
   - Name: Coin
     Description: A shiny gold coin.
     Icon: {fileID: 0}
+  - Name: Credits
+    Description: Digital coin
+    Icon: {fileID: 0}

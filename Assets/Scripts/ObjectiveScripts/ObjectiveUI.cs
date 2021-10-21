@@ -5,6 +5,7 @@ using UnityEngine;
 public class ObjectiveUI : MonoBehaviour
 {
     public bool showUI = false;
+	public UIPlacement uiManager;
 	public ObjectivesList objectives;
 
     [Header("UI Rect for List")]
@@ -15,6 +16,7 @@ public class ObjectiveUI : MonoBehaviour
     {
         if (showUI)
         {
+			GUILayout.BeginArea(uiManager.objectiveUIRect);
 			//GameObject.Find("Objectives").GetComponent<ObjectivesList>().ReadFile();
 			if (GUILayout.Button("Save")){
 				objectives.WriteFile("", objectives.playerObjectiveList);
@@ -23,6 +25,7 @@ public class ObjectiveUI : MonoBehaviour
 				objectives.playerObjectiveList = objectives.ReadFile("");
 				foreach(MainObjectiveList obj in objectives.playerObjectiveList){
 				GameObject go = GameObject.Find(obj._objectiveObjectName);
+				if (go == null) continue;
 				Objective objective = go.GetComponent<Objective>();
 
 					if (obj.completed){
@@ -48,7 +51,15 @@ public class ObjectiveUI : MonoBehaviour
 				if (GameObject.Find(obj._objectiveObjectName)) {
 
 				GameObject go = GameObject.Find(obj._objectiveObjectName);
+				if (go == null) {
+					GUILayout.EndHorizontal();
+					continue;
+				}
 				Objective objective=go.GetComponent<Objective>();
+				if (objective == null) {
+					GUILayout.EndHorizontal();
+					continue;
+				}
 				if (objective.Status == ObjectiveStatus.Achieved && objective.NextObjective != null) objective.ParentScript.CurrentObjective = objective.NextObjective;
 
 
@@ -111,6 +122,7 @@ public class ObjectiveUI : MonoBehaviour
             //     GUILayout.Box(objective.Status.ToString());
             //     GUILayout.EndHorizontal();
             // }
+			GUILayout.EndArea();
         }
 
     }
@@ -145,6 +157,7 @@ public class ObjectiveUI : MonoBehaviour
 	void Awake()
     {
 		objectives = GameObject.Find("Objectives").GetComponent<ObjectivesList>();
-        DontDestroyOnLoad(this.gameObject);
+		uiManager = GameObject.Find("UIManager").GetComponent<UIPlacement>();
+        //DontDestroyOnLoad(this.gameObject);
     }
 }

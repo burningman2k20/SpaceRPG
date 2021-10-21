@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7385119946960883802}
   - component: {fileID: 6459811585100696955}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: WeaponMount
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -57,6 +57,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -81,6 +82,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!65 &7385119946960883802
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -145,7 +147,7 @@ GameObject:
   - component: {fileID: 2327633429347470081}
   - component: {fileID: 8347866360894000596}
   m_Layer: 0
-  m_Name: MyPlayer
+  m_Name: CubePlayer
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -194,6 +196,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -218,6 +221,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!65 &6029247148930126283
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -284,6 +288,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameManager: {fileID: 0}
+  spawnManager: {fileID: 0}
+  prefabManager: {fileID: 0}
   topForwardSpeed: 5
   topReverseSpeed: 2
   acceleration: 3
@@ -298,6 +304,7 @@ MonoBehaviour:
   playerControl: 1
   _distance: 0
   maxDistance: 4
+  weapon: {fileID: 722552852638560334, guid: 2e573488d7994d14487d024fb52e649b, type: 3}
 --- !u!54 &2327633429347470081
 Rigidbody:
   m_ObjectHideFlags: 0
