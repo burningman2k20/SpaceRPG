@@ -7,6 +7,7 @@ using static GameDataTypes;
 
 public class NewCharacterData {
 
+    public string PlayerCharaterName;
     public ShipControls shipControls = new ShipControls();
     public SimpleTankController groundControls = new SimpleTankController();
     public string shipEngineName;
@@ -15,6 +16,7 @@ public class NewCharacterData {
     public Engines shipEngine;
     public string shipGeneratorName;
     public ShipGenerator shipGenerator;
+    public float currentEnergy = 0;
     public Weapons shipWeapon;
     public Weapons groundWeapon;
 }
@@ -76,7 +78,11 @@ public class CharacterManager : MonoBehaviour
         if (gameManager.playerLocation == locationType.Ground) groundWeapon = prefabManager.currentPrefab.GetComponent<SimpleTankController>().weapon;
         if (engine != null) characterData.shipEngineName = engine.name;
         if (shipWeapon != null) characterData.shipWeaponName = shipWeapon.name;
-        if (shipGenerator != null) characterData.shipGeneratorName = shipGenerator.name;
+        if (shipGenerator != null)
+        {
+            //characterData.currentEnergy = shipGenerator.currentEnergy;
+            characterData.shipGeneratorName = shipGenerator.name;
+        }
 
         if (gameManager.playerLocation == locationType.Ground) characterData.groundWeaponName = groundWeapon.name;
         

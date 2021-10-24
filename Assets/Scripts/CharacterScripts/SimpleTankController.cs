@@ -107,7 +107,7 @@ public class SimpleTankController : MonoBehaviour {
 				obj1 = GameObject.Find (prefabManager.spacePrefab.name + "(Clone)").transform;
 				obj2 = transform;
 				_distance = Vector3.Distance (obj1.position, obj2.position);
-				Debug.Log(_distance);
+				//Debug.Log(_distance);
 			if (_distance <= maxDistance) {
 
 					gameManager.playerLocation = locationType.Air;

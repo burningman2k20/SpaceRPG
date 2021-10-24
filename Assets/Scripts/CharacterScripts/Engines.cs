@@ -6,6 +6,7 @@ public class Engines : MonoBehaviour
 {
 	public int forwardThrust = 5000;
 	public int backwardThrust = 2500;
+    public float engineDrain = 1;
     // Start is called before the first frame update
     void Start()
     {

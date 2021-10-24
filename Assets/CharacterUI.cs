@@ -45,7 +45,8 @@ public class CharacterUI : MonoBehaviour
 		if (characterManager.characterData.shipGenerator != null){
 			GUILayout.BeginHorizontal();
 			GUILayout.Box(string.Format("{0}",characterManager.characterData.shipGenerator));
-			if (GUILayout.Button("Unequip", GUILayout.Width(UnequipButtonWidth))){
+            GUILayout.Box(string.Format("{0}/{1}", characterManager.characterData.shipGenerator.getCurrentEnergy(characterManager.characterData), characterManager.characterData.shipGenerator.getMaxEnergy()));
+            if (GUILayout.Button("Unequip", GUILayout.Width(UnequipButtonWidth))){
                 string generator_name = characterManager.characterData.shipGenerator.gameObject.name;
                 //prefabManager.currentPrefab.GetComponent<ShipControls>().engine.gameObject.name;
                 inventoryManager.inventory.AddItem(inventoryManager.itemDatabase.GetItem(generator_name),1);

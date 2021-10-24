@@ -22,6 +22,7 @@ public class StartScene : MonoBehaviour
 	SpawnManager spawnManager;
 	ObjectivesList objectiveList;
 	InventoryManager inventoryManager;
+    CharacterManager characterManager;
 
     public string MenuSceneName;
     // Start is called before the first frame update
@@ -32,7 +33,8 @@ public class StartScene : MonoBehaviour
 		spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
 		objectiveList = GameObject.Find("Objectives").GetComponent<ObjectivesList>();
 		inventoryManager = GameObject.Find("InventoryManager").GetComponent<InventoryManager>();
-		gameManager.gameStarted = gameStarted;
+        characterManager = GameObject.Find("CharacterManager").GetComponent<CharacterManager>();
+        gameManager.gameStarted = gameStarted;
 		GameObject.Find("UIManager").GetComponent<ObjectiveUI>().showUI = showObjectiveUI;
 		//objectiveList.objectiveList.RemoveAll()
 		//objectiveList = GameObject.Find("Objectives").GetComponent<ObjectivesList>();
@@ -78,7 +80,8 @@ public class StartScene : MonoBehaviour
 		} // endif go != null
 		}
 		inventoryManager.ReadFile("");
-		yield return new WaitForSeconds(1.0f);
+        characterManager.ReadFile("");
+        yield return new WaitForSeconds(1.0f);
 	}
 
 	void OnSceneLoaded(){

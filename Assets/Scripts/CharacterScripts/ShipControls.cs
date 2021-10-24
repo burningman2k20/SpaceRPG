@@ -48,6 +48,7 @@ public class ShipControls : MonoBehaviour
     public Weapons weapon;
 
     public ShipGenerator generator;
+    public float currentEnergy = 0;
     //public weapon_class weapon;//=new weapon_class();
 
     float bank = 0F;
@@ -152,6 +153,12 @@ public class ShipControls : MonoBehaviour
     void FixedUpdate()
     {
 
+        if (thrust > 0F){
+            if (generator != null && engine != null) generator.Drain(characterManager.characterData, engine.engineDrain);
+        }
+
+        if (generator != null) generator.Regenerate(characterManager.characterData);
+
         if (Mathf.Abs(thrust) > 0.01F)
         {
             if (GetComponent<Rigidbody>().velocity.sqrMagnitude > sqrdSpeedThresholdForDrag)
@@ -237,7 +244,7 @@ public class ShipControls : MonoBehaviour
 
                     break;
             }
-            Debug.Log(gameManager.playerLocation);
+            //Debug.Log(gameManager.playerLocation);
              gameManager.GetComponent<GameManager>()._SpawnPlayer();//"same map");
             gameManager.updateTargets = true;
         }
@@ -249,7 +256,7 @@ public class ShipControls : MonoBehaviour
 
             //gameManager.spaceSpawn = "StartingPoint";
             spawnManager.spawnName = gameManager.spaceSpawn;
-            print(gameManager.sceneName);
+            //print(gameManager.sceneName);
             // if (gameManager.sceneName == "none" || gameManager.sceneName == "")
             // {
                 gameManager.sceneName = "Space";
@@ -267,27 +274,34 @@ public class ShipControls : MonoBehaviour
 
         if (playerControl)
         {
-            thrust = Input.GetAxis("Vertical");
-            turn = Input.GetAxis("Horizontal") * turnSpeed;
-			//Debug.Log(string.Format("thrust {0} --- turn {1}", thrust, turn));
+            if (generator.getCurrentEnergy(characterManager.characterData) > 0)
+            {
+                thrust = Input.GetAxis("Vertical");
+                turn = Input.GetAxis("Horizontal") * turnSpeed;
+            }
+            //Debug.Log(string.Format("thrust {0} --- turn {1}", thrust, turn));
         }
 
         if (thrust > 0F)
         {
             theThrust *= forwardThrust;
+            
             if (!thrustGlowOn)
             {
                 thrustGlowOn = !thrustGlowOn;
                 BroadcastMessage("SetThrustGlow", thrustGlowOn, SendMessageOptions.DontRequireReceiver);
+               
             }
         }
         else
         {
             theThrust *= backwardThrust;
+             
             if (thrustGlowOn)
             {
                 thrustGlowOn = !thrustGlowOn;
                 BroadcastMessage("SetThrustGlow", thrustGlowOn, SendMessageOptions.DontRequireReceiver);
+               
             }
         }
 

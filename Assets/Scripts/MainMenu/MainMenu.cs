@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using QuantumTek.QuantumUI;
+using TMPro;
 
 public class MainMenu : MonoBehaviour
 {
 
     GameManager gameManager;
+    CharacterManager characterManager;
     QUI_OptionList optionList;
 
     public string sceneName = "Space";
@@ -16,6 +18,11 @@ public class MainMenu : MonoBehaviour
         Application.Quit();
     }
 
+    public void SetCharacterName(){
+        TMPro.TMP_InputField inputField = GameObject.Find("NameField").GetComponent<TMPro.TMP_InputField>();
+        characterManager.characterData.PlayerCharaterName = inputField.text;
+        Debug.Log(characterManager.characterData.PlayerCharaterName);
+    }
     public void StartGame()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
@@ -26,6 +33,7 @@ public class MainMenu : MonoBehaviour
     public void CreateGame()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        characterManager = GameObject.Find("CharacterManager").GetComponent<CharacterManager>();
         gameManager.gameStarted = true;
         SceneManager.LoadScene(sceneName);
     }

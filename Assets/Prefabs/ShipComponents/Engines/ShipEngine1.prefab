@@ -46,6 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   forwardThrust: 5000
   backwardThrust: 2500
+  engineDrain: 100
 --- !u!114 &-3703361062683840513
 MonoBehaviour:
   m_ObjectHideFlags: 0
