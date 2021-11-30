@@ -146,6 +146,8 @@ GameObject:
   - component: {fileID: 3486012720475645155}
   - component: {fileID: 888227256265771334}
   - component: {fileID: 9199875920247747522}
+  - component: {fileID: 4752184839160083606}
+  - component: {fileID: 3111653985857956859}
   m_Layer: 0
   m_Name: SpherePlayer
   m_TagString: Player
@@ -277,6 +279,7 @@ MonoBehaviour:
   gameManager: {fileID: 0}
   spawnManager: {fileID: 0}
   prefabManager: {fileID: 0}
+  characterManager: {fileID: 0}
   topForwardSpeed: 5
   topReverseSpeed: 2
   acceleration: 3
@@ -291,6 +294,7 @@ MonoBehaviour:
   playerControl: 1
   _distance: 0
   maxDistance: 4
+  weapon: {fileID: 0}
 --- !u!54 &3486012720475645155
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -352,3 +356,36 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &4752184839160083606
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6396438201294510196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4289ea48bd62045d8bb87f0e80bb315f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Level: 0
+  MaxLevel: 0
+  XP: 0
+  MaxXP: 0
+  MaxXPIncrease: 0
+  XPType: 0
+  MaxXPType: 0
+--- !u!114 &3111653985857956859
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6396438201294510196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a730b6264b3b24dc58d806bccdcd51d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AttributeDatabase: {fileID: 11400000, guid: 9ec9161f1bf014127b393269e50918f6, type: 2}
+  ModifierDatabase: {fileID: 11400000, guid: 9f3d04028e8ef48cbb1b5f87e6773fbc, type: 2}

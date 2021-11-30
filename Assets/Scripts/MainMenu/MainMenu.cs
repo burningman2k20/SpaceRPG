@@ -12,6 +12,8 @@ public class MainMenu : MonoBehaviour
     CharacterManager characterManager;
     QUI_OptionList optionList;
 
+
+
     public string sceneName = "Space";
 
     public void ExitGame(){
@@ -26,6 +28,7 @@ public class MainMenu : MonoBehaviour
     public void StartGame()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        characterManager = GameObject.Find("CharacterManager").GetComponent<CharacterManager>();
         gameManager.gameStarted = true;
         SceneManager.LoadScene(sceneName);
     }
@@ -50,7 +53,8 @@ public class MainMenu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        characterManager = GameObject.Find("CharacterManager").GetComponent<CharacterManager>();
 
     }
 

@@ -17,6 +17,8 @@ GameObject:
   - component: {fileID: -6167517960387378215}
   - component: {fileID: 849630729680134605}
   - component: {fileID: 5668312440738823143}
+  - component: {fileID: 1375755388678572432}
+  - component: {fileID: 3766765851213625063}
   m_Layer: 0
   m_Name: SpaceShuttleGrey
   m_TagString: Player
@@ -70,7 +72,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 196f791ddbbd68e4cb33c0d673942fe5, type: 2}
+  - {fileID: 2100000, guid: 15157d0978134764bbf273b7ed1a67df, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -169,6 +171,8 @@ MonoBehaviour:
   landingControl: 0
   engine: {fileID: 8874444131430883487, guid: 770aa8536ef4cfd48bc533634097e008, type: 3}
   weapon: {fileID: 7352977061864315948, guid: f7725a57571bf7744ba4bea87d8c0f1b, type: 3}
+  generator: {fileID: 0}
+  currentEnergy: 0
 --- !u!114 &849630729680134605
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -214,6 +218,39 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Data: {fileID: 11400000, guid: 19559c3d141a34bc8a8098d14d64edac, type: 2}
+--- !u!114 &1375755388678572432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 111078}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a730b6264b3b24dc58d806bccdcd51d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AttributeDatabase: {fileID: 11400000, guid: 9ec9161f1bf014127b393269e50918f6, type: 2}
+  ModifierDatabase: {fileID: 11400000, guid: 9f3d04028e8ef48cbb1b5f87e6773fbc, type: 2}
+--- !u!114 &3766765851213625063
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 111078}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4289ea48bd62045d8bb87f0e80bb315f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Level: 0
+  MaxLevel: 0
+  XP: 0
+  MaxXP: 0
+  MaxXPIncrease: 0
+  XPType: 0
+  MaxXPType: 0
 --- !u!1 &4046816864751717670
 GameObject:
   m_ObjectHideFlags: 0

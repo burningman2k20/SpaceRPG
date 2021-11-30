@@ -13,14 +13,14 @@ MonoBehaviour:
   m_Name: Demo Node Database
   m_EditorClassIdentifier: 
   DataDB: {fileID: 11400000, guid: e7d676327c0174a7aaf35fd634634ec7, type: 2}
-  NextID: 7
+  NextID: 5
   Nodes:
   - ID: 0
     Type: 1
     Window:
       serializedVersion: 2
-      x: 36
-      y: 41
+      x: -61
+      y: 46
       width: 300
       height: 125
     Inputs: []
@@ -44,8 +44,8 @@ MonoBehaviour:
     Type: 2
     Window:
       serializedVersion: 2
-      x: 408
-      y: 184
+      x: 342
+      y: 88
       width: 300
       height: 150
     Inputs:
@@ -87,8 +87,8 @@ MonoBehaviour:
     Type: 2
     Window:
       serializedVersion: 2
-      x: 825
-      y: 143
+      x: 832
+      y: 61
       width: 300
       height: 150
     Inputs:
@@ -128,8 +128,8 @@ MonoBehaviour:
     Type: 2
     Window:
       serializedVersion: 2
-      x: 820
-      y: 371
+      x: 812
+      y: 268
       width: 300
       height: 150
     Inputs:
@@ -215,14 +215,6 @@ MonoBehaviour:
         MaxProgress: 3
         Optional: 0
         Completed: 0
-      - ID: 4
-        Name: Steal Tomatoes
-        Description: 
-        NextTasks: 
-        Progress: 0
-        MaxProgress: 3
-        Optional: 1
-        Completed: 0
       FirstTasks: 02000000
   TaskNodes:
   - ID: 2
@@ -273,102 +265,4 @@ MonoBehaviour:
       Progress: 0
       MaxProgress: 3
       Optional: 0
-      Completed: 0
-  - ID: 3
-    Type: 1
-    Window:
-      serializedVersion: 2
-      x: 0
-      y: 0
-      width: 300
-      height: 150
-    Inputs:
-    - ID: 0
-      Name: Previous Tasks
-      Type: 0
-      Y: 7.5
-      AllowMultipleConnections: 1
-      Connections:
-        keys: 
-        values: []
-    Outputs:
-    - ID: 0
-      Name: Next Tasks
-      Type: 1
-      Y: 7.5
-      AllowMultipleConnections: 1
-      Connections:
-        keys: 
-        values: []
-    AllowedInputs:
-    - InputType: 2
-      InputID: 0
-      OutputType: 1
-      OutputID: 0
-    - InputType: 2
-      InputID: 0
-      OutputType: 2
-      OutputID: 0
-    AllowedOutputs:
-    - InputType: 2
-      InputID: 0
-      OutputType: 2
-      OutputID: 0
-    Data:
-      ID: 3
-      Name: Buy Tomatoes
-      Description: 
-      NextTasks: 
-      Progress: 0
-      MaxProgress: 3
-      Optional: 0
-      Completed: 0
-  - ID: 4
-    Type: 1
-    Window:
-      serializedVersion: 2
-      x: 0
-      y: 0
-      width: 300
-      height: 150
-    Inputs:
-    - ID: 0
-      Name: Previous Tasks
-      Type: 0
-      Y: 7.5
-      AllowMultipleConnections: 1
-      Connections:
-        keys: 
-        values: []
-    Outputs:
-    - ID: 0
-      Name: Next Tasks
-      Type: 1
-      Y: 7.5
-      AllowMultipleConnections: 1
-      Connections:
-        keys: 
-        values: []
-    AllowedInputs:
-    - InputType: 2
-      InputID: 0
-      OutputType: 1
-      OutputID: 0
-    - InputType: 2
-      InputID: 0
-      OutputType: 2
-      OutputID: 0
-    AllowedOutputs:
-    - InputType: 2
-      InputID: 0
-      OutputType: 2
-      OutputID: 0
-    Data:
-      ID: 4
-      Name: Steal Tomatoes
-      Description: 
-      NextTasks: 
-      Progress: 0
-      MaxProgress: 3
-      Optional: 1
       Completed: 0

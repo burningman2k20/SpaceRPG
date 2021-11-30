@@ -146,6 +146,8 @@ GameObject:
   - component: {fileID: 9050406513890126436}
   - component: {fileID: 2327633429347470081}
   - component: {fileID: 8347866360894000596}
+  - component: {fileID: -1149719596527377838}
+  - component: {fileID: 6689000737652762629}
   m_Layer: 0
   m_Name: CubePlayer
   m_TagString: Player
@@ -290,6 +292,7 @@ MonoBehaviour:
   gameManager: {fileID: 0}
   spawnManager: {fileID: 0}
   prefabManager: {fileID: 0}
+  characterManager: {fileID: 0}
   topForwardSpeed: 5
   topReverseSpeed: 2
   acceleration: 3
@@ -353,3 +356,36 @@ MonoBehaviour:
     width: 0
     height: 0
   IsFacing: 0
+--- !u!114 &-1149719596527377838
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6029247148930126276}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a730b6264b3b24dc58d806bccdcd51d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AttributeDatabase: {fileID: 11400000, guid: 9ec9161f1bf014127b393269e50918f6, type: 2}
+  ModifierDatabase: {fileID: 11400000, guid: 9f3d04028e8ef48cbb1b5f87e6773fbc, type: 2}
+--- !u!114 &6689000737652762629
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6029247148930126276}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4289ea48bd62045d8bb87f0e80bb315f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Level: 0
+  MaxLevel: 0
+  XP: 0
+  MaxXP: 0
+  MaxXPIncrease: 0
+  XPType: 0
+  MaxXPType: 0
