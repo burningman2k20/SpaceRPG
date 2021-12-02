@@ -29,7 +29,7 @@ public class ShipGenerator : MonoBehaviour
 
     public void Drain(NewCharacterData data,float drain){
         if (data.currentEnergy > 0) data.currentEnergy -= drain;
-        if (data.currentEnergy < 0) data.currentEnergy = 0;
+       // if (data.currentEnergy < 0) data.currentEnergy = 0;
     }
     public void Regenerate(NewCharacterData data){
         if (data.currentEnergy < maxEnergy) data.currentEnergy += regenPerMinute;

@@ -43,6 +43,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9da6586cd39cee74e85a748fac9098bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  regenPerMinute: 1
+  regenPerMinute: 0.01
   maxEnergy: 1000
   currentEnergy: 1000

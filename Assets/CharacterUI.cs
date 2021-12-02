@@ -115,6 +115,7 @@ public class CharacterUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+		if (prefabManager.currentPrefab == null) return;
 		if (characterManager.characterData.shipControls == null) characterManager.characterData.shipControls = prefabManager.currentPrefab.gameObject.GetComponent<ShipControls>();
 		if (characterManager.characterData.groundControls == null)  characterManager.characterData.groundControls = prefabManager.currentPrefab.gameObject.GetComponent<SimpleTankController>();
 

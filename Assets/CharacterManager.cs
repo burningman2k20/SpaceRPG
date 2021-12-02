@@ -148,6 +148,7 @@ public class CharacterManager : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (prefabManager.currentPrefab == null) return;
         if (prefabManager.currentPrefab.GetComponent<SimpleTankController>() != null){
             characterData.groundControls = prefabManager.currentPrefab.GetComponent<SimpleTankController>();
             characterData.groundControls.weapon = characterData.groundWeapon;
