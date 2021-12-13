@@ -49,4 +49,6 @@ MonoBehaviour:
   position: {x: 100, y: 100}
   size: {x: 100, y: 100}
   nextDialog: {fileID: 0}
-  dialogType: 0
+  dialogType: 1
+  item: {fileID: 0}
+  itemCount: 0

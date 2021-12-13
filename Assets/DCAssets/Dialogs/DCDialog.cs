@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using QuantumTek.QuantumInventory;
 
 public class DCDialogResponses : MonoBehaviour {
     public string responseText;
@@ -8,6 +9,7 @@ public class DCDialogResponses : MonoBehaviour {
 }
 
 public enum DialogType {
+    Nothing,
     GiveItem,
     TakeItem,
     AddObjective,
@@ -28,6 +30,11 @@ public class DCDialog : MonoBehaviour
     //public int dialogIndex;
     public DCDialog nextDialog;
     public DialogType dialogType;
+
+    public QI_ItemData item;
+    public int itemCount = 0;
+
+    public Objective objective;
     // Start is called before the first frame update
     void Start()
     {

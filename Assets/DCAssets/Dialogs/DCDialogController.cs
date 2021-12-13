@@ -54,7 +54,7 @@ public class DCDialogController : MonoBehaviour
       //if (currentDialog == null) showDialog = false;            
          if (Input.GetKeyDown(KeyCode.Space) && showDialog){
              
-             nextDialog = currentDialog.nextDialog;
+            // nextDialog = currentDialog.nextDialog;
             currentDialog = nextDialog;
             if (nextDialog == null || currentDialog == null) showDialog = false;            
         }
@@ -81,6 +81,25 @@ public class DCDialogController : MonoBehaviour
         GUILayout.Label(currentDialog.dialogName);
         GUILayout.Label(currentDialog.dialogText);
 
+        if (currentDialog.dialogType == DialogType.TakeItem){
+            GUILayout.BeginHorizontal();
+                GUILayout.Label("item");
+                GUILayout.Button("Take Item");
+            GUILayout.EndHorizontal();
+        }
+        if (currentDialog.dialogType == DialogType.GiveItem){
+            GUILayout.BeginHorizontal();
+                GUILayout.Label("item");
+                GUILayout.Button("Give Item");
+            GUILayout.EndHorizontal();
+        }
+
+        if (currentDialog.dialogType == DialogType.AddObjective){
+            GUILayout.BeginHorizontal();
+                GUILayout.Label("objective");
+                GUILayout.Button("Accept Objective");
+            GUILayout.EndHorizontal();
+        }
         if (currentDialog.responses.Count > 0) {
 
             foreach(DCDialog dialog in currentDialog.responses){

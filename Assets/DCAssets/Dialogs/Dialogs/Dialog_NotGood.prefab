@@ -50,3 +50,5 @@ MonoBehaviour:
   size: {x: 100, y: 100}
   nextDialog: {fileID: 877018404059103739, guid: 45b14bf4db5384b4d8d032c1b4810eb8, type: 3}
   dialogType: 0
+  item: {fileID: 0}
+  itemCount: 0
