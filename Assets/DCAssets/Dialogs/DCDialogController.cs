@@ -83,20 +83,20 @@ public class DCDialogController : MonoBehaviour
 
         if (currentDialog.dialogType == DialogType.TakeItem){
             GUILayout.BeginHorizontal();
-                GUILayout.Label("item");
+                GUILayout.Label(currentDialog.item.Name);
                 GUILayout.Button("Take Item");
             GUILayout.EndHorizontal();
         }
         if (currentDialog.dialogType == DialogType.GiveItem){
             GUILayout.BeginHorizontal();
-                GUILayout.Label("item");
+                GUILayout.Label(currentDialog.item.Name);
                 GUILayout.Button("Give Item");
             GUILayout.EndHorizontal();
         }
 
         if (currentDialog.dialogType == DialogType.AddObjective){
             GUILayout.BeginHorizontal();
-                GUILayout.Label("objective");
+                GUILayout.Label(currentDialog.objective.Description);
                 GUILayout.Button("Accept Objective");
             GUILayout.EndHorizontal();
         }

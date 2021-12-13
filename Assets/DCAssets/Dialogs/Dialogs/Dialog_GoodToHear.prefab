@@ -49,6 +49,7 @@ MonoBehaviour:
   position: {x: 100, y: 100}
   size: {x: 100, y: 100}
   nextDialog: {fileID: 0}
-  dialogType: 1
+  dialogType: 3
   item: {fileID: 0}
   itemCount: 0
+  objective: {fileID: 8892803187117434861, guid: 44b1a8486904e07418acb65cdcc8fe81, type: 3}
