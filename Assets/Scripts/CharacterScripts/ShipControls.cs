@@ -154,7 +154,7 @@ public class ShipControls : MonoBehaviour
     {
 
         if (thrust > 0F){
-            if (generator != null && engine != null) generator.Drain(characterManager.characterData, engine.engineDrain);
+           // if (generator != null && engine != null) generator.Drain(characterManager.characterData, engine.engineDrain);
         }
 
         if (generator != null) generator.Regenerate(characterManager.characterData);
