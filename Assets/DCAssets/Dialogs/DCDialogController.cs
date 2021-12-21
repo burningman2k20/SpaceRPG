@@ -15,6 +15,8 @@ public class DCDialogController : MonoBehaviour
     public DCDialog currentDialog;
     public DCDialog nextDialog;
 
+    public string previousDialogText = "";
+
     //private
     public bool showDialog = false;
 
@@ -45,6 +47,10 @@ public class DCDialogController : MonoBehaviour
         return null;
     }
 
+    void VendorDialog(QI_ItemData[] venderItems, QI_ItemData[] playerItems){
+        DCDialog vendorDialog = new DCDialog();
+    }
+
     // Start is called before the first frame update
     void Start() {
     }
@@ -55,6 +61,7 @@ public class DCDialogController : MonoBehaviour
          if (Input.GetKeyDown(KeyCode.Space) && showDialog){
              
             // nextDialog = currentDialog.nextDialog;
+            previousDialogText = currentDialog.dialogText;
             currentDialog = nextDialog;
             if (nextDialog == null || currentDialog == null) showDialog = false;            
         }
@@ -77,9 +84,11 @@ public class DCDialogController : MonoBehaviour
         dialogPosition = currentDialog.position;
         dialogSize = currentDialog.size;
 
-        GUILayout.BeginArea(new Rect(dialogPosition.x, dialogPosition.y, dialogSize.x, dialogSize.y));
-        GUILayout.Label(currentDialog.dialogName);
-        GUILayout.Label(currentDialog.dialogText);
+        if (currentDialog.dialogType != DialogType.Vendor){
+            GUILayout.BeginArea(new Rect(dialogPosition.x, dialogPosition.y, dialogSize.x, dialogSize.y));
+            GUILayout.Label(previousDialogText);
+            GUIL-ayout.Label(currentDialog.dialogName);
+            GUILayout.Label(currentDialog.dialogText);
 
         if (currentDialog.dialogType == DialogType.TakeItem){
             GUILayout.BeginHorizontal();
@@ -110,7 +119,22 @@ public class DCDialogController : MonoBehaviour
             }
         }
         GUILayout.EndArea();
+        } else { // end if vendor dialog
+            windowRect = GUILayout.Window(0, windowRect, VendorWindow, "Vendor Window");
+        }
+
+        }
 
        
+    }
+
+    // Make the contents of the window
+    void VendorWindow(int windowID)
+    {
+        // This button will size to fit the window
+        if (GUILayout.Button("Hello World"))
+        {
+            print("Got a click");
+        }
     }
 }

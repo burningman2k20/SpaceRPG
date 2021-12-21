@@ -13,7 +13,8 @@ public enum DialogType {
     GiveItem,
     TakeItem,
     AddObjective,
-    RemoveObjective
+    RemoveObjective,
+    Vendor
 }
 // public enum InteracteType {
     
