@@ -735,7 +735,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b401da3bb9311547ab7dd0dccbaaff2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialog: {fileID: -8239550174072910910, guid: 7b618ba48a6a9cb4580a51f262d7eb6a, type: 3}
+  dialog: {fileID: -96534371409981376, guid: c55d80cad1ec35946b95e230af932b0b, type: 3}
   type: 1
 --- !u!1001 &393527808
 PrefabInstance:

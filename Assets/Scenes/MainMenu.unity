@@ -3094,11 +3094,23 @@ MonoBehaviour:
   dialogs:
   - {fileID: -8239550174072910910, guid: 7b618ba48a6a9cb4580a51f262d7eb6a, type: 3}
   - {fileID: -3596727405919418756, guid: a50acfa70b87b0e4aafbb0a9baf7a8c3, type: 3}
+  - {fileID: -6200254994828510031, guid: 7d2827ec727e77e428d9fec416b754d8, type: 3}
   dialogPosition: {x: 50, y: 50}
   dialogSize: {x: 75, y: 250}
-  currentDialog: {fileID: -8239550174072910910, guid: 7b618ba48a6a9cb4580a51f262d7eb6a, type: 3}
+  currentDialog: {fileID: -96534371409981376, guid: c55d80cad1ec35946b95e230af932b0b, type: 3}
+  previousDialog: {fileID: 0}
   nextDialog: {fileID: 0}
-  showDialog: 1
+  parentRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 0
+    height: 0
+  goBack: 1
+  previousDialogText: 
+  showDialog: 0
+  inventoryManager: {fileID: 0}
+  objectivesList: {fileID: 0}
 --- !u!114 &1790329090
 MonoBehaviour:
   m_ObjectHideFlags: 0

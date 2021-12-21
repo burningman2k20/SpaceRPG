@@ -46,9 +46,14 @@ MonoBehaviour:
   responses: []
   dialogText: Im not doing good.
   dialogName: Player
+  image: {fileID: 2800000, guid: 80ec159cf9fd9154c9aa28096ff592df, type: 3}
   position: {x: 100, y: 100}
-  size: {x: 100, y: 100}
+  size: {x: 250, y: 200}
+  keepParentSize: 0
   nextDialog: {fileID: 877018404059103739, guid: 45b14bf4db5384b4d8d032c1b4810eb8, type: 3}
   dialogType: 0
   item: {fileID: 0}
   itemCount: 0
+  responseIndex: 0
+  canGoBack: 1
+  objective: {fileID: 0}

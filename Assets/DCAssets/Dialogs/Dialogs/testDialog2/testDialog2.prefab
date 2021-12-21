@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &5735330438180117912
+--- !u!1 &8770674655946255915
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,22 +8,22 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 594104386368682921}
-  - component: {fileID: -3596727405919418756}
+  - component: {fileID: 3492166790134778041}
+  - component: {fileID: -96534371409981376}
   m_Layer: 0
-  m_Name: Dialog_ImFIne
+  m_Name: testDialog2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &594104386368682921
+--- !u!4 &3492166790134778041
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5735330438180117912}
+  m_GameObject: {fileID: 8770674655946255915}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -31,22 +31,29 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-3596727405919418756
+--- !u!114 &-96534371409981376
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5735330438180117912}
+  m_GameObject: {fileID: 8770674655946255915}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b6ccee9812af6c24abd796bd76a6f36b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   responses: []
-  dialogText: im doing fine
-  dialogName: Player
-  position: {x: 200, y: 200}
-  size: {x: 100, y: 100}
-  nextDialog: {fileID: -782340278251512949, guid: 0e99ae0fe252f5444b2001a8f39aaa6f, type: 3}
+  dialogText: Hi
+  dialogName: 
+  image: {fileID: 2800000, guid: 18ee9e1610ca8264fbd1bdd3144a5e0c, type: 3}
+  position: {x: 50, y: 50}
+  size: {x: 300, y: 200}
+  keepParentSize: 1
+  nextDialog: {fileID: -5772822200299573655, guid: f1082f706b5dcec449fa7ef2ce1effac, type: 3}
   dialogType: 0
+  item: {fileID: 0}
+  itemCount: 0
+  responseIndex: 0
+  canGoBack: 0
+  objective: {fileID: 0}

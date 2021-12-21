@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using QuantumTek.QuantumInventory;
 
 public class DCDialogController : MonoBehaviour
 {
@@ -13,12 +14,20 @@ public class DCDialogController : MonoBehaviour
     public Vector2 dialogSize = new Vector2(75,250);
     //private
     public DCDialog currentDialog;
+    public DCDialog previousDialog;
     public DCDialog nextDialog;
+
+    public Rect parentRect;
+
+    public bool goBack = false;
 
     public string previousDialogText = "";
 
     //private
     public bool showDialog = false;
+
+    public InventoryManager inventoryManager;
+    public ObjectivesList objectivesList;
 
     void addDialog(DCDialog dialog){
         dialogs.Add(dialog);
@@ -53,6 +62,9 @@ public class DCDialogController : MonoBehaviour
 
     // Start is called before the first frame update
     void Start() {
+        parentRect = new Rect(currentDialog.position.x, currentDialog.position.y, currentDialog.size.x, currentDialog.size.y);
+        inventoryManager = GameObject.Find("InventoryManager").GetComponent<InventoryManager>();
+        objectivesList = GameObject.Find("Objectives").GetComponent<ObjectivesList>();
     }
 
     // Update is called once per frame
@@ -61,7 +73,10 @@ public class DCDialogController : MonoBehaviour
          if (Input.GetKeyDown(KeyCode.Space) && showDialog){
              
             // nextDialog = currentDialog.nextDialog;
-            previousDialogText = currentDialog.dialogText;
+            previousDialog = currentDialog;
+            if (currentDialog.keepParentSize) {
+                parentRect = new Rect(currentDialog.position.x, currentDialog.position.y, currentDialog.size.x, currentDialog.size.y);
+            }
             currentDialog = nextDialog;
             if (nextDialog == null || currentDialog == null) showDialog = false;            
         }
@@ -85,50 +100,92 @@ public class DCDialogController : MonoBehaviour
         dialogSize = currentDialog.size;
 
         if (currentDialog.dialogType != DialogType.Vendor){
-            GUILayout.BeginArea(new Rect(dialogPosition.x, dialogPosition.y, dialogSize.x, dialogSize.y));
+
+            parentRect = GUILayout.Window(0, parentRect, DialogWindow, "Dialog", GUILayout.ExpandWidth( true ));
+        } else { // end if vendor dialog
+            Rect windowRect = new Rect(20, 20, 120, 50);
+            windowRect = GUILayout.Window(1, windowRect, VendorWindow, "Vendor Window", GUILayout.ExpandWidth( true ));
+        }
+
+        }
+
+
+    void DialogWindow(int windowID){
+        if (currentDialog.canGoBack){
+            if (GUILayout.Button("< Back")){
+                currentDialog = previousDialog;
+            }
+            
+        }
+            //GUILayout.BeginArea(new Rect(dialogPosition.x, dialogPosition.y, dialogSize.x, dialogSize.y));
             GUILayout.Label(previousDialogText);
-            GUIL-ayout.Label(currentDialog.dialogName);
+
+            GUILayout.BeginHorizontal();
+            GUILayout.Label(currentDialog.image, GUILayout.Height(64), GUILayout.Width(64));
+            GUILayout.Label(currentDialog.dialogName);
+            GUILayout.EndHorizontal();
             GUILayout.Label(currentDialog.dialogText);
 
         if (currentDialog.dialogType == DialogType.TakeItem){
             GUILayout.BeginHorizontal();
                 GUILayout.Label(currentDialog.item.Name);
-                GUILayout.Button("Take Item");
+                if (!inventoryManager.hasItem(currentDialog.item.Name)){
+                    if (GUILayout.Button("Take Item")){
+                        inventoryManager.Pickup(currentDialog.item.Name);
+                    }
+                } else {
+                    GUILayout.Label("Has item already");
+                }
             GUILayout.EndHorizontal();
         }
         if (currentDialog.dialogType == DialogType.GiveItem){
             GUILayout.BeginHorizontal();
                 GUILayout.Label(currentDialog.item.Name);
-                GUILayout.Button("Give Item");
+                if (GUILayout.Button("Give Item")){
+
+                }
             GUILayout.EndHorizontal();
         }
 
         if (currentDialog.dialogType == DialogType.AddObjective){
             GUILayout.BeginHorizontal();
                 GUILayout.Label(currentDialog.objective.Description);
-                GUILayout.Button("Accept Objective");
+                //Debug.Log(currentDialog.objective.name);
+                if (!objectivesList.isObjectiveEnabled(currentDialog.objective.name)){
+                 if (GUILayout.Button("Accept Objective")){
+                     objectivesList.enableObjective(currentDialog.objective.name);
+                    }
+                } else {
+                    GUILayout.Label("Objective already activated");
+                }
             GUILayout.EndHorizontal();
         }
         if (currentDialog.responses.Count > 0) {
 
             foreach(DCDialog dialog in currentDialog.responses){
                 if (GUILayout.Button(dialog.dialogText)){
+                      if (currentDialog.keepParentSize) {
+                          parentRect = new Rect(currentDialog.position.x, currentDialog.position.y, currentDialog.size.x, currentDialog.size.y);
+                    }
+                    previousDialogText = string.Format("You: {0}",dialog.dialogText);
+                    previousDialog = currentDialog;
                     currentDialog = dialog.nextDialog;    
                 }
             
             }
+        } else {
+            if (GUILayout.Button("Continue")){
+                if (currentDialog.nextDialog != null){
+                previousDialog = currentDialog;
+                currentDialog = currentDialog.nextDialog;
+                } else {
+                    showDialog = false;
+                }
+            }
         }
-        GUILayout.EndArea();
-        } else { // end if vendor dialog
-            windowRect = GUILayout.Window(0, windowRect, VendorWindow, "Vendor Window");
-        }
-
-        }
-
-       
+        //GUILayout.EndArea();
     }
-
-    // Make the contents of the window
+          // Make the contents of the window
     void VendorWindow(int windowID)
     {
         // This button will size to fit the window
@@ -136,5 +193,8 @@ public class DCDialogController : MonoBehaviour
         {
             print("Got a click");
         }
-    }
+    
 }
+
+}
+  

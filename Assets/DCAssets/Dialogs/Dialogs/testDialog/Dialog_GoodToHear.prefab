@@ -46,10 +46,14 @@ MonoBehaviour:
   responses: []
   dialogText: Good to hear.
   dialogName: Bob
+  image: {fileID: 2800000, guid: 80ec159cf9fd9154c9aa28096ff592df, type: 3}
   position: {x: 100, y: 100}
-  size: {x: 100, y: 100}
+  size: {x: 250, y: 200}
+  keepParentSize: 1
   nextDialog: {fileID: 0}
   dialogType: 3
   item: {fileID: 0}
   itemCount: 0
+  responseIndex: 0
+  canGoBack: 1
   objective: {fileID: 8892803187117434861, guid: 44b1a8486904e07418acb65cdcc8fe81, type: 3}
