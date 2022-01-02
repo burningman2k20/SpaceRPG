@@ -26,6 +26,7 @@ public class DCDialogController : MonoBehaviour
     //private
     public bool showDialog = false;
 
+    public PrefabManager prefabManager;
     public InventoryManager inventoryManager;
     public ObjectivesList objectivesList;
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using static GameDataTypes;
+using UnityEditor;
 
 public class StartScene : MonoBehaviour
 {
@@ -25,6 +26,14 @@ public class StartScene : MonoBehaviour
     CharacterManager characterManager;
 
     public string MenuSceneName;
+
+    [MenuItem("GameObject/Create Folder")]
+    static void CreateFolder()
+    {
+        string guid = AssetDatabase.CreateFolder("Assets", "My Folder");
+        string newFolderPath = AssetDatabase.GUIDToAssetPath(guid);
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -81,7 +90,7 @@ public class StartScene : MonoBehaviour
 		}
 		inventoryManager.ReadFile("");
         characterManager.ReadFile("");
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(2.0f);
 	}
 
 	void OnSceneLoaded(){

@@ -30,10 +30,12 @@ public class InventoryManager : MonoBehaviour {
 		items.Add ("ShipEngine1", itemDatabase.GetItem ("ShipEngine1"));
 		items.Add ("ShipWeapon1", itemDatabase.GetItem ("ShipWeapon1"));
 		items.Add ("ShipGenerator1", itemDatabase.GetItem ("ShipGenerator1"));
+		items.Add ("PlayerWeapon1", itemDatabase.GetItem ("PlayerWeapon1"));
 		inventory.AddItem (items["Health Potion"], 1);
 		inventory.AddItem (items["ShipEngine1"], 1);
 		inventory.AddItem (items["ShipWeapon1"], 1);
 		inventory.AddItem (items["ShipGenerator1"], 1);
+		inventory.AddItem (items["PlayerWeapon1"], 1);
 	}
 
 	public static InventoryData CreateFromJSON (string jsonString) {
