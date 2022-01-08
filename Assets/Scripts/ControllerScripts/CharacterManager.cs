@@ -22,8 +22,8 @@ public class NewCharacterData {
 }
 public class CharacterManager : MonoBehaviour
 {
-    public PrefabManager prefabManager;
-    public InventoryManager inventoryManager;
+    //public PrefabManager prefabManager;
+    //public InventoryManager inventoryManager;
     public GameManager gameManager;
     public string jsonFileName = "character_data.json";
 
@@ -75,7 +75,7 @@ public class CharacterManager : MonoBehaviour
         //prefabManager.currentPrefab.GetComponent<ShipControls>().weapon;
         Weapons groundWeapon = characterData.groundWeapon;
         //null;
-        if (gameManager.playerLocation == locationType.Ground) groundWeapon = prefabManager.currentPrefab.GetComponent<SimpleTankController>().weapon;
+        if (gameManager.playerLocation == locationType.Ground) groundWeapon = gameManager.prefabManager.currentPrefab.GetComponent<SimpleTankController>().weapon;
         if (engine != null) characterData.shipEngineName = engine.name;
         if (shipWeapon != null) characterData.shipWeaponName = shipWeapon.name;
         if (shipGenerator != null)
@@ -113,14 +113,14 @@ public class CharacterManager : MonoBehaviour
         line = reader.ReadLine();
         characterData = CreateFromJSON(line);
         QI_ItemData item;
-        item = inventoryManager.itemDatabase.GetItem(characterData.shipWeaponName);
+        item = gameManager.inventoryManager.itemDatabase.GetItem(characterData.shipWeaponName);
         //if (characterData.shipWeaponName != "") 
         characterData.shipWeapon = item.ItemPrefab.gameObject.GetComponent<Weapons>();
         //if (characterData.shipEngineName != "") 
-        characterData.shipEngine = inventoryManager.itemDatabase.GetItem(characterData.shipEngineName).ItemPrefab.gameObject.GetComponent<Engines>();
-        characterData.shipGenerator = inventoryManager.itemDatabase.GetItem(characterData.shipGeneratorName).ItemPrefab.gameObject.GetComponent<ShipGenerator>();
+        characterData.shipEngine = gameManager.inventoryManager.itemDatabase.GetItem(characterData.shipEngineName).ItemPrefab.gameObject.GetComponent<Engines>();
+        characterData.shipGenerator = gameManager.inventoryManager.itemDatabase.GetItem(characterData.shipGeneratorName).ItemPrefab.gameObject.GetComponent<ShipGenerator>();
         //if (characterData.groundWeaponName != "") 
-        characterData.groundWeapon = inventoryManager.itemDatabase.GetItem(characterData.groundWeaponName).ItemPrefab.gameObject.GetComponent<Weapons>();
+        characterData.groundWeapon = gameManager.inventoryManager.itemDatabase.GetItem(characterData.groundWeaponName).ItemPrefab.gameObject.GetComponent<Weapons>();
         //Debug.Log("Read -> " + line);
         //NewCharacterData data = CreateFromJSON(line);
         //inventory.AddItem(itemDatabase.GetItem(data.name), data.amount);
@@ -133,29 +133,29 @@ public class CharacterManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        prefabManager = GameObject.Find("PrefabManager").GetComponent<PrefabManager>();
+        //prefabManager = GameObject.Find("PrefabManager").GetComponent<PrefabManager>();
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-        inventoryManager = GameObject.Find("InventoryManager").GetComponent<InventoryManager>();
+       // inventoryManager = GameObject.Find("InventoryManager").GetComponent<InventoryManager>();
         
     }
 
     void Awake(){
-        prefabManager = GameObject.Find("PrefabManager").GetComponent<PrefabManager>();
+       // prefabManager = GameObject.Find("PrefabManager").GetComponent<PrefabManager>();
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-        inventoryManager = GameObject.Find("InventoryManager").GetComponent<InventoryManager>();
+       // inventoryManager = GameObject.Find("InventoryManager").GetComponent<InventoryManager>();
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (prefabManager.currentPrefab == null) return;
-        if (prefabManager.currentPrefab.GetComponent<SimpleTankController>() != null){
-            characterData.groundControls = prefabManager.currentPrefab.GetComponent<SimpleTankController>();
+        if (gameManager.prefabManager.currentPrefab == null) return;
+        if (gameManager.prefabManager.currentPrefab.GetComponent<SimpleTankController>() != null){
+            characterData.groundControls = gameManager.prefabManager.currentPrefab.GetComponent<SimpleTankController>();
             characterData.groundControls.weapon = characterData.groundWeapon;
         }
 
-        if (prefabManager.currentPrefab.GetComponent<ShipControls>() != null){
-            characterData.shipControls = prefabManager.currentPrefab.GetComponent<ShipControls>();
+        if (gameManager.prefabManager.currentPrefab.GetComponent<ShipControls>() != null){
+            characterData.shipControls = gameManager.prefabManager.currentPrefab.GetComponent<ShipControls>();
             characterData.shipControls.engine = characterData.shipEngine;
             characterData.shipControls.generator = characterData.shipGenerator;
             characterData.shipControls.weapon = characterData.shipWeapon;

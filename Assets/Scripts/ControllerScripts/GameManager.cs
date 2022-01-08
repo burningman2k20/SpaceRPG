@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour {
     [Header ("Managers")]
     [SerializeField] public SpawnManager spawnManager;
     [SerializeField] public PrefabManager prefabManager;
+    [SerializeField] public InventoryManager inventoryManager;
     public CharacterManager characterManager;
 
     //[Header("Stats")]
@@ -173,6 +174,7 @@ public class GameManager : MonoBehaviour {
     void Start () {
         prefabManager = GameObject.Find ("PrefabManager").GetComponent<PrefabManager> ();
         spawnManager = GameObject.Find ("SpawnManager").GetComponent<SpawnManager> ();
+        inventoryManager = GameObject.Find ("InventoryManager").GetComponent<InventoryManager> ();
 
         follow = GameObject.Find ("MainCamera").GetComponent<CamFollow> ();
         mapFollow = GameObject.Find ("MapCamera").GetComponent<CamFollow> ();

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -110,7 +110,7 @@ public class ObjectivesList : MonoBehaviour {
 
 	public bool isObjectiveEnabled (string name) {
 		for (int index = 0; index < playerObjectiveList.Count; index++) {
-			Debug.Log (playerObjectiveList[index]._objectiveObjectName);
+			//Debug.Log (playerObjectiveList[index]._objectiveObjectName);
 			if (playerObjectiveList[index]._objectiveObjectName == name) {
 
 				if (playerObjectiveList[index].enabled) return true;

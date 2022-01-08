@@ -6,7 +6,7 @@ using static GameDataTypes;
 public class SpawnManager : MonoBehaviour
 {
     GameManager gameManager;
-    PrefabManager prefabManager;
+    //PrefabManager prefabManager;
     public GameObject[] SpawnPoints;
     public string spawnName;
     public string sceneName;
@@ -59,7 +59,7 @@ public class SpawnManager : MonoBehaviour
     void Start()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-        prefabManager = GameObject.Find("PrefabManager").GetComponent<PrefabManager>();
+        //prefabManager = GameObject.Find("PrefabManager").GetComponent<PrefabManager>();
 
     }
 
