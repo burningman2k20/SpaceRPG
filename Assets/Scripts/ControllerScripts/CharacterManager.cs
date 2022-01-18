@@ -75,7 +75,7 @@ public class CharacterManager : MonoBehaviour
         //prefabManager.currentPrefab.GetComponent<ShipControls>().weapon;
         Weapons groundWeapon = characterData.groundWeapon;
         //null;
-        if (gameManager.playerLocation == locationType.Ground) groundWeapon = gameManager.prefabManager.currentPrefab.GetComponent<SimpleTankController>().weapon;
+        if (gameManager.playerLocation == locationType.Ground) groundWeapon = gameManager.prefabManager.currentPrefab.GetComponent<SimpleTankController>().groundWeapon;
         if (engine != null) characterData.shipEngineName = engine.name;
         if (shipWeapon != null) characterData.shipWeaponName = shipWeapon.name;
         if (shipGenerator != null)
@@ -151,14 +151,14 @@ public class CharacterManager : MonoBehaviour
         if (gameManager.prefabManager.currentPrefab == null) return;
         if (gameManager.prefabManager.currentPrefab.GetComponent<SimpleTankController>() != null){
             characterData.groundControls = gameManager.prefabManager.currentPrefab.GetComponent<SimpleTankController>();
-            characterData.groundControls.weapon = characterData.groundWeapon;
+            characterData.groundControls.groundWeapon = characterData.groundWeapon;
         }
 
         if (gameManager.prefabManager.currentPrefab.GetComponent<ShipControls>() != null){
             characterData.shipControls = gameManager.prefabManager.currentPrefab.GetComponent<ShipControls>();
             characterData.shipControls.engine = characterData.shipEngine;
             characterData.shipControls.generator = characterData.shipGenerator;
-            characterData.shipControls.weapon = characterData.shipWeapon;
+            characterData.shipControls.shipWeapon = characterData.shipWeapon;
         }
         //characterData.tankController = prefabManager.currentPrefab.GetComponent<SimpleTankController>();
         //characterData.shipControls = prefab.currentPrefab.GetComponent<ShipControls>();

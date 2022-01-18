@@ -5,12 +5,13 @@ using QuantumTek.QuantumInventory;
 [RequireComponent (typeof (CharacterController))]
 public class SimpleTankController : MonoBehaviour {
     public GameManager gameManager;
-	public SpawnManager spawnManager;
-	public PrefabManager prefabManager;
-    public CharacterManager characterManager;
+	//`public SpawnManager spawnManager;
+	//public PrefabManager prefabManager;
+    //public CharacterManager characterManager;
 
     // Tank Controller
-    public enum MoveDirection { Forward, Reverse, Stop }
+    //[Header ("Ground Control")]
+    public enum MoveGroundDirection { Forward, Reverse, Stop }
 
     [Header ("Motion")]
 
@@ -46,34 +47,34 @@ public class SimpleTankController : MonoBehaviour {
     [SerializeField] public float maxDistance = 1f;
     float currentSpeed;
     float currentTopSpeed;
-    MoveDirection currentDirection = MoveDirection.Stop;
+    MoveGroundDirection currentGroundDirection = MoveGroundDirection.Stop;
     bool isBraking = false;
     bool isAccelerating = false;
     float stickyDelayCount = 9999f;
     CharacterController m_Controller;
     Transform m_Transform;
-    public Weapons weapon;
+    public Weapons groundWeapon;
 
     Transform obj1; // = GameObject.Find(gameManager.prefabLocation.name).transform;
 
     Transform obj2; //= transform;
     
     
-     public void setWeapon(QI_ItemData new_weapon){
+     public void setGroundWeapon(QI_ItemData new_weapon){
 		if (new_weapon == null){
-            characterManager.characterData.groundWeapon = null;
-            weapon = null;
+            gameManager.characterManager.characterData.groundWeapon = null;
+            groundWeapon = null;
 			//forwardThrust = 0;
 	        //backwardThrust = 0;
 			return;
 		}
 		string weapon_name = new_weapon.ItemPrefab.gameObject.name;
 		Weapons changeWeapon =  new_weapon.ItemPrefab.gameObject.GetComponent<Weapons>();
-        characterManager.characterData.groundWeaponName = weapon_name;
+        gameManager.characterManager.characterData.groundWeaponName = weapon_name;
 		//Resources.Load<Engines>("Prefabs/ShipComponents/Engines/" + engine_name) ;
 		//Debug.Log(engine_name);
 		//Engines changeEngine = new_engine.ItemPrefab.gameObject.GetComponent<Engines>();
-        weapon = changeWeapon;
+        groundWeapon = changeWeapon;
         //forwardThrust = engine.forwardThrust;
         //backwardThrust = engine.backwardThrust;
     }
@@ -84,7 +85,7 @@ public class SimpleTankController : MonoBehaviour {
         m_Controller = GetComponent<CharacterController> ();
         //spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
         //prefabManager = GameObject.Find("PrefabManager").GetComponent<PrefabManager>();
-        characterManager = GameObject.Find("CharacterManager").GetComponent<CharacterManager>();
+        //characterManager = GameObject.Find("CharacterManager").GetComponent<CharacterManager>();
         currentTopSpeed = topForwardSpeed;
         //weapon = characterManager.characterData.groundWeapon;
     }
@@ -100,11 +101,11 @@ public class SimpleTankController : MonoBehaviour {
 
     public void Update () {
 
-        if (Input.GetKeyDown (KeyCode.T) && spawnManager.spawnName != "none") {
+        if (Input.GetKeyDown (KeyCode.T) && gameManager.spawnManager.spawnName != "none") {
             if (gameManager.playerLocation == locationType.Building) return;
 
-			if (GameObject.Find (prefabManager.spacePrefab.name + "(Clone)")) {
-				obj1 = GameObject.Find (prefabManager.spacePrefab.name + "(Clone)").transform;
+			if (GameObject.Find (gameManager.prefabManager.spacePrefab.name + "(Clone)")) {
+				obj1 = GameObject.Find (gameManager.prefabManager.spacePrefab.name + "(Clone)").transform;
 				obj2 = transform;
 				_distance = Vector3.Distance (obj1.position, obj2.position);
 				//Debug.Log(_distance);
@@ -132,14 +133,14 @@ public class SimpleTankController : MonoBehaviour {
             }
         }
         // Direction to move this update.
-        Vector3 moveDirection = Vector3.zero;
+        Vector3 moveGroundDirection = Vector3.zero;
 
         // Direction requested this update.
-        MoveDirection requestedDirection = MoveDirection.Stop;
+        MoveGroundDirection requestedDirection = MoveGroundDirection.Stop;
 
         if (m_Controller.isGrounded) {
             // Simulate loss of turn rate at speed.
-            float currentTurnRate = Mathf.Lerp (currentDirection == MoveDirection.Forward ?
+            float currentTurnRate = Mathf.Lerp (currentGroundDirection == MoveGroundDirection.Forward ?
                 topForwardTurnRate : topReverseTurnRate, stoppedTurnRate, 1 - (currentSpeed / currentTopSpeed));
 
             Vector3 angles = m_Transform.eulerAngles;
@@ -149,51 +150,51 @@ public class SimpleTankController : MonoBehaviour {
             // Based on input, determine requested action.
             if (Input.GetAxis ("Vertical") > 0) // Requesting forward.
             {
-                requestedDirection = MoveDirection.Forward;
+                requestedDirection = MoveGroundDirection.Forward;
                 isAccelerating = true;
             } else {
                 if (Input.GetAxis ("Vertical") < 0) // Requesting reverse.
                 {
-                    requestedDirection = MoveDirection.Reverse;
+                    requestedDirection = MoveGroundDirection.Reverse;
                     isAccelerating = true;
                 } else {
-                    requestedDirection = currentDirection;
+                    requestedDirection = currentGroundDirection;
                     isAccelerating = false;
                 }
             }
 
             isBraking = false;
 
-            if (currentDirection == MoveDirection.Stop) {
+            if (currentGroundDirection == MoveGroundDirection.Stop) {
                 stickyDelayCount = stickyDelayCount + Time.deltaTime;
 
                 // If we are not sticky throttle or if we have hit the delay then change direction.
                 if (!stickyThrottle || (stickyDelayCount > stickyThrottleDelay)) {
                     // Make sure we can go in the requested direction.
-                    if (((requestedDirection == MoveDirection.Reverse) && (topReverseSpeed > 0)) ||
-                        ((requestedDirection == MoveDirection.Forward) && (topForwardSpeed > 0))) {
-                        currentDirection = requestedDirection;
+                    if (((requestedDirection == MoveGroundDirection.Reverse) && (topReverseSpeed > 0)) ||
+                        ((requestedDirection == MoveGroundDirection.Forward) && (topForwardSpeed > 0))) {
+                        currentGroundDirection = requestedDirection;
                     }
                 }
             } else {
                 // Requesting a change of direction, but not stopped so we are braking.
-                if (currentDirection != requestedDirection) {
+                if (currentGroundDirection != requestedDirection) {
                     isBraking = true;
                     isAccelerating = false;
                 }
             }
 
             // Setup top speeds and move direction.
-            if (currentDirection == MoveDirection.Forward) {
-                moveDirection = Vector3.forward;
+            if (currentGroundDirection == MoveGroundDirection.Forward) {
+                moveGroundDirection = Vector3.forward;
                 currentTopSpeed = topForwardSpeed;
             } else {
-                if (currentDirection == MoveDirection.Reverse) {
-                    moveDirection = -1 * Vector3.forward;
+                if (currentGroundDirection == MoveGroundDirection.Reverse) {
+                    moveGroundDirection = -1 * Vector3.forward;
                     currentTopSpeed = topReverseSpeed;
                 } else {
-                    if (currentDirection == MoveDirection.Stop) {
-                        moveDirection = Vector3.zero;
+                    if (currentGroundDirection == MoveGroundDirection.Stop) {
+                        moveGroundDirection = Vector3.zero;
                     }
                 }
             }
@@ -213,7 +214,7 @@ public class SimpleTankController : MonoBehaviour {
             }
 
             // If our speed is below zero, stop and initialize.
-            if ((currentSpeed < 0) || ((currentSpeed == 0) && (currentDirection != MoveDirection.Stop))) {
+            if ((currentSpeed < 0) || ((currentSpeed == 0) && (currentGroundDirection != MoveGroundDirection.Stop))) {
                 SetStopped ();
             } else {
                 // Limit the speed to the current top speed.
@@ -222,20 +223,20 @@ public class SimpleTankController : MonoBehaviour {
                 }
             }
 
-            moveDirection = m_Transform.TransformDirection (moveDirection);
+            moveGroundDirection = m_Transform.TransformDirection (moveGroundDirection);
         }
 
         // Implement gravity so we can stay grounded.
-        moveDirection.y = moveDirection.y - (gravity * Time.deltaTime);
+        moveGroundDirection.y = moveGroundDirection.y - (gravity * Time.deltaTime);
 
-        moveDirection.z = moveDirection.z * (Time.deltaTime * currentSpeed);
-        moveDirection.x = moveDirection.x * (Time.deltaTime * currentSpeed);
-        m_Controller.Move (moveDirection);
+        moveGroundDirection.z = moveGroundDirection.z * (Time.deltaTime * currentSpeed);
+        moveGroundDirection.x = moveGroundDirection.x * (Time.deltaTime * currentSpeed);
+        m_Controller.Move (moveGroundDirection);
     }
 
     private void SetStopped () {
         currentSpeed = 0;
-        currentDirection = MoveDirection.Stop;
+        currentGroundDirection = MoveGroundDirection.Stop;
         isAccelerating = false;
         isBraking = false;
         stickyDelayCount = 0;
@@ -243,9 +244,9 @@ public class SimpleTankController : MonoBehaviour {
 
     void Start () {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager> ();
-		spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager> ();
-		prefabManager = GameObject.Find("PrefabManager").GetComponent<PrefabManager> ();
-        characterManager = GameObject.Find("CharacterManager").GetComponent<CharacterManager> ();
+		//spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager> ();
+		//prefabManager = GameObject.Find("PrefabManager").GetComponent<PrefabManager> ();
+        //characterManager = GameObject.Find("CharacterManager").GetComponent<CharacterManager> ();
         //GameObject.Find("UIManager").GetComponent<SelectionUI>().FindSelectionObjects();
     }
 }

@@ -26,9 +26,13 @@ public class DCDialogController : MonoBehaviour
     //private
     public bool showDialog = false;
 
+    public GameManager gameManager;
     public PrefabManager prefabManager;
     public InventoryManager inventoryManager;
     public ObjectivesList objectivesList;
+
+    ShipControls shipControls;
+    SimpleTankController tankControls;
 
     void addDialog(DCDialog dialog){
         dialogs.Add(dialog);
@@ -64,12 +68,15 @@ public class DCDialogController : MonoBehaviour
     // Start is called before the first frame update
     void Start() {
         parentRect = new Rect(currentDialog.position.x, currentDialog.position.y, currentDialog.size.x, currentDialog.size.y);
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         inventoryManager = GameObject.Find("InventoryManager").GetComponent<InventoryManager>();
         objectivesList = GameObject.Find("Objectives").GetComponent<ObjectivesList>();
     }
 
     // Update is called once per frame
     void Update() {
+         shipControls = gameManager.prefabManager.currentPrefab.GetComponent<ShipControls>();
+         tankControls = gameManager.prefabManager.currentPrefab.GetComponent<SimpleTankController>();
       //if (currentDialog == null) showDialog = false;            
          if (Input.GetKeyDown(KeyCode.Space) && showDialog){
              
@@ -95,8 +102,14 @@ public class DCDialogController : MonoBehaviour
 
     void OnGUI(){
 
-        if (!showDialog) return;
+        if (!showDialog) { 
+            
+            return; 
+            }
 
+       
+
+        
         dialogPosition = currentDialog.position;
         dialogSize = currentDialog.size;
 
@@ -112,6 +125,9 @@ public class DCDialogController : MonoBehaviour
 
 
     void DialogWindow(int windowID){
+        if (shipControls != null) shipControls.playerControl = false;
+        if (tankControls != null) tankControls.playerControl = false;
+
         if (currentDialog.canGoBack){
             if (GUILayout.Button("< Back")){
                 currentDialog = previousDialog;
@@ -180,6 +196,8 @@ public class DCDialogController : MonoBehaviour
                 previousDialog = currentDialog;
                 currentDialog = currentDialog.nextDialog;
                 } else {
+                    if (shipControls != null) shipControls.playerControl = true;
+                    if (tankControls != null) tankControls.playerControl = true;
                     showDialog = false;
                 }
             }

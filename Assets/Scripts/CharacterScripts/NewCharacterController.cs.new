@@ -1,0 +1,159 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+using System.Collections;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+using static GameDataTypes;
+using static NewLanding;
+using UnityEngine.UI;
+
+using QuantumTek.QuantumInventory;
+
+public enum ControlType { Ground, Ship };
+public class NewCharacterController : MonoBehaviour {
+
+    public ControlType controlType;
+    public GameManager gameManager;
+
+    // START OF GOUND CONTROL VARIABLES
+    //[Header ("Ground Control")]
+    public enum MoveGroundDirection { Forward, Reverse, Stop }
+
+    [Header ("Motion")]
+
+    [SerializeField] float topForwardSpeed = 3.0f;
+    [SerializeField] float topReverseSpeed = 1.0f;
+
+    [Tooltip ("Rate at which top speed is reached.")]
+    [SerializeField] float acceleration = 3.0f;
+
+    [Tooltip ("Rate at which speed is lost when not accelerating.")]
+    [SerializeField] float deceleration = 2.0f;
+
+    [Tooltip ("Rate at which speed is lost when braking (input opposite of current direction).")]
+    [SerializeField] float brakingDeceleration = 4.0f;
+
+    [Tooltip ("Maintain speed when no input is provided.")]
+    [SerializeField] bool stickyThrottle = false;
+
+    [Tooltip ("Delay between change of direction when sticky throttle is enabled.")]
+    [SerializeField] float stickyThrottleDelay = 0.35f;
+
+    [SerializeField] float gravity = 10.0f;
+
+    [Header ("Rotation")]
+
+    [SerializeField] float topForwardTurnRate = 1.0f;
+    [SerializeField] float topReverseTurnRate = 2.0f;
+    [SerializeField] float stoppedTurnRate = 2.0f;
+
+	[SerializeField] public bool playerControl = true;
+
+    [SerializeField] public float _distance;
+    [SerializeField] public float maxDistance = 1f;
+    float currentSpeed;
+    float currentTopSpeed;
+    MoveGroundDirection currentGroundDirection = MoveGroundDirection.Stop;
+    bool isBraking = false;
+    bool isAccelerating = false;
+    float stickyDelayCount = 9999f;
+    CharacterController m_Controller;
+    Transform m_Transform;
+    public Weapons groundWeapon;
+
+    Transform obj1; // = GameObject.Find(gameManager.prefabLocation.name).transform;
+
+    Transform obj2; //= transform;
+    // END OF GOUND CONTROL VARIABLES
+
+    // START OF SHIP CONTROL VARIABLES
+    //[Header("Ship Controls")]
+
+    [Header("Motion")]
+    //public engine_class engine_info;
+    [SerializeField] public float hoverHeight = 3F;
+    [SerializeField] public float hoverHeightStrictness = 1F;
+    [SerializeField] public float forwardThrust = 5000F;
+    [SerializeField] public float backwardThrust = 2500F;
+    [SerializeField] public float bankAmount = 0.1F;
+    [SerializeField] public float bankSpeed = 0.2F;
+    [SerializeField] public Vector3 bankAxis = new Vector3(-1F, 0F, 0F);
+    [SerializeField] public float turnSpeed = 8000F;
+
+    [SerializeField] public Vector3 forwardDirection = new Vector3(1F, 0F, 0F);
+
+    [SerializeField] public float mass = 5F;
+
+    // positional drag
+    [SerializeField] public float sqrdSpeedThresholdForDrag = 25F;
+    [SerializeField] public float superDrag = 2F;
+    [SerializeField] public float fastDrag = 0.5F;
+    [SerializeField] public float slowDrag = 0.01F;
+
+    // angular drag
+    [SerializeField] public float sqrdAngularSpeedThresholdForDrag = 5F;
+    [SerializeField] public float superADrag = 32F;
+    [SerializeField] public float fastADrag = 16F;
+    [SerializeField] public float slowADrag = 0.1F;
+
+    //[SerializeField] public bool playerControl = true;
+
+    [SerializeField] public bool landingControl = false;
+
+    public Engines engine;//=new engine_class();
+    public Weapons shipWeapon;
+
+    public ShipGenerator generator;
+    public float currentEnergy = 0;
+    //public weapon_class weapon;//=new weapon_class();
+
+    float bank = 0F;
+
+    // END OF SHIP CONTROL VARIABLES
+    
+
+void Awake(){
+        m_Transform = GetComponent<Transform> ();
+
+        m_Controller = GetComponent<CharacterController> ();
+        //spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
+        //prefabManager = GameObject.Find("PrefabManager").GetComponent<PrefabManager>();
+        //characterManager = GameObject.Find("CharacterManager").GetComponent<CharacterManager>();
+        currentTopSpeed = topForwardSpeed;
+}
+void Start(){
+GetComponent<Rigidbody>().mass = mass;
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+}   
+
+void Update(){
+
+    switch(controlType){
+
+        case ControlType.Ground:
+                break;
+            
+        case ControlType.Ship:
+                break;
+        }
+    
+}
+
+void FixedUpdate(){
+
+      switch(controlType){
+
+        case ControlType.Ground:
+                break;
+            
+        case ControlType.Ship:
+                break;
+        }
+
+}
+
+}
+

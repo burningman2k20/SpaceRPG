@@ -45,7 +45,7 @@ public class ShipControls : MonoBehaviour
     [SerializeField] public bool landingControl = false;
 
     public Engines engine;//=new engine_class();
-    public Weapons weapon;
+    public Weapons shipWeapon;
 
     public ShipGenerator generator;
     public float currentEnergy = 0;
@@ -53,8 +53,8 @@ public class ShipControls : MonoBehaviour
 
     float bank = 0F;
     GameManager gameManager;
-	SpawnManager spawnManager;
-    CharacterManager characterManager;
+	//SpawnManager spawnManager;
+    //CharacterManager characterManager;
     LandingArea landing;
 
     void OnTriggerEnter(Collider other)
@@ -79,9 +79,9 @@ public class ShipControls : MonoBehaviour
     //   return weapon;
     // }
     public void setEngine(QI_ItemData new_engine){
-        characterManager = GameObject.Find("CharacterManager").GetComponent<CharacterManager> ();
+//        gameManager.characterManager = GameObject.Find("CharacterManager").GetComponent<CharacterManager> ();
 		if (new_engine == null){
-            characterManager.characterData.shipEngine = null;
+            gameManager.characterManager.characterData.shipEngine = null;
             engine = null;
 			forwardThrust = 0;
 	        backwardThrust = 0;
@@ -95,16 +95,16 @@ public class ShipControls : MonoBehaviour
 		//Debug.Log(engine_name);
 		//Engines changeEngine = new_engine.ItemPrefab.gameObject.GetComponent<Engines>();
         engine = changeEngine;
-        characterManager.characterData.shipEngine = engine;
+        gameManager.characterManager.characterData.shipEngine = engine;
         forwardThrust = engine.forwardThrust;
         backwardThrust = engine.backwardThrust;
     }
 
-    public void setWeapon(QI_ItemData new_weapon){
-        characterManager = GameObject.Find("CharacterManager").GetComponent<CharacterManager> ();
+    public void setShipWeapon(QI_ItemData new_weapon){
+        //characterManager = GameObject.Find("CharacterManager").GetComponent<CharacterManager> ();
 		if (new_weapon == null){
-			weapon = null;
-            characterManager.characterData.shipWeapon = null;
+			shipWeapon = null;
+            gameManager.characterManager.characterData.shipWeapon = null;
             //forwardThrust = 0;
             //backwardThrust = 0;
             return;
@@ -116,8 +116,8 @@ public class ShipControls : MonoBehaviour
         //Resources.Load<Engines>("Prefabs/ShipComponents/Engines/" + engine_name) ;
 		//Debug.Log(engine_name);
 		//Engines changeEngine = new_engine.ItemPrefab.gameObject.GetComponent<Engines>();
-        weapon = changeWeapon;
-        characterManager.characterData.shipWeapon = weapon;
+        shipWeapon = changeWeapon;
+        gameManager.characterManager.characterData.shipWeapon = shipWeapon;
         //forwardThrust = engine.forwardThrust;
         //backwardThrust = engine.backwardThrust;
     }
@@ -133,8 +133,8 @@ public class ShipControls : MonoBehaviour
     {
         GetComponent<Rigidbody>().mass = mass;
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-		spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
-        characterManager = GameObject.Find("CharacterManager").GetComponent<CharacterManager> ();
+		//spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
+        //characterManager = GameObject.Find("CharacterManager").GetComponent<CharacterManager> ();
         //GameObject.Find("UIManager").GetComponent<SelectionUI>().FindSelectionObjects();
         //forwardThrust=forward_thrust;
         //backwardThrust=backward_thrust;
@@ -145,7 +145,7 @@ public class ShipControls : MonoBehaviour
     }
 
     void Awake(){
-        characterManager = GameObject.Find("CharacterManager").GetComponent<CharacterManager> ();
+        //characterManager = GameObject.Find("CharacterManager").GetComponent<CharacterManager> ();
         //weapon = characterManager.characterData.groundWeapon;
         //engine = characterManager.characterData.shipEngine;
     }
@@ -157,7 +157,7 @@ public class ShipControls : MonoBehaviour
            // if (generator != null && engine != null) generator.Drain(characterManager.characterData, engine.engineDrain);
         }
 
-        if (generator != null) generator.Regenerate(characterManager.characterData);
+        if (generator != null) generator.Regenerate(gameManager.characterManager.characterData);
 
         if (Mathf.Abs(thrust) > 0.01F)
         {
@@ -220,7 +220,7 @@ public class ShipControls : MonoBehaviour
             gameManager.newLandingCode();
         }
 
-        if (Input.GetKeyDown(KeyCode.L) && gameManager.canLand && spawnManager.spawnName != "none")
+        if (Input.GetKeyDown(KeyCode.L) && gameManager.canLand && gameManager.spawnManager.spawnName != "none")
         {
 
             // print(gameManager.spawnName);
@@ -240,7 +240,7 @@ public class ShipControls : MonoBehaviour
                         gameManager.sceneName = "Ground";
                     }
 
-                    SceneManager.LoadScene(spawnManager.sceneName);
+                    SceneManager.LoadScene(gameManager.spawnManager.sceneName);
 
                     break;
             }
@@ -255,7 +255,7 @@ public class ShipControls : MonoBehaviour
             gameManager.playerLocation = locationType.Space;
 
             //gameManager.spaceSpawn = "StartingPoint";
-            spawnManager.spawnName = gameManager.spaceSpawn;
+            gameManager.spawnManager.spawnName = gameManager.spaceSpawn;
             //print(gameManager.sceneName);
             // if (gameManager.sceneName == "none" || gameManager.sceneName == "")
             // {
@@ -274,7 +274,7 @@ public class ShipControls : MonoBehaviour
 
         if (playerControl)
         {
-            if (generator.getCurrentEnergy(characterManager.characterData) > 0)
+            if (generator.getCurrentEnergy(gameManager.characterManager.characterData) > 0)
             {
                 thrust = Input.GetAxis("Vertical");
                 turn = Input.GetAxis("Horizontal") * turnSpeed;

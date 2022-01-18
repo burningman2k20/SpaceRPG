@@ -52,8 +52,8 @@ public class Shoot : MonoBehaviour
         ShipControls shipControls = prefabManager.currentPrefab.GetComponent<ShipControls>();
         SimpleTankController tankController = prefabManager.currentPrefab.GetComponent<SimpleTankController>();
 
-        if (shipControls != null) projectileData = shipControls.weapon.projectile.GetComponent<Projectile>();
-        if (tankController != null) projectileData = tankController.weapon.projectile.GetComponent<Projectile>();
+        if (shipControls != null) projectileData = shipControls.shipWeapon.projectile.GetComponent<Projectile>();
+        if (tankController != null) projectileData = tankController.groundWeapon.projectile.GetComponent<Projectile>();
         /*if (Input.GetKeyDown (KeyCode.Q)) {
             shoot = !shoot;
             GameObject.Find ("UIManager").GetComponent<SelectionUI> ().target = null;
